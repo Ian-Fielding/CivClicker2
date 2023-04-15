@@ -1,0 +1,49 @@
+// Create Account Section Inputs
+let username = document.getElementById('Username');
+let password = document.getElementById('Password');
+let addUserButton = document.getElementById('addUser');
+
+// Login Section Inputs
+let loginU = document.getElementById('SigUsername');
+let loginP = document.getElementById('SigPassword');
+let loginButton = document.getElementById('login');
+
+addUserButton.addEventListener('click', createUser);
+loginButton.addEventListener('click', loginUser);
+
+// Function to send message
+function createUser() {
+    const user = username.value.trim();
+    const pass = password.value.trim();
+    fetch('/add/user/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user, pass })
+    })
+      .catch((err) => console.error('Error Caught', err));
+}
+
+// Login the User
+function loginUser(){
+  const user = loginU.value.trim();
+  const pass = loginP.value.trim();
+  fetch('/account/login', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user, pass })
+  })
+  .then(response => {
+    if (response.ok) {
+      response.json().then(data => {
+        if (data.success) {
+          window.location.href = "/home.html";
+        } else {
+          alert("Incorrect Login Information");
+        }
+      });
+    } else {
+      alert("Error");
+    }
+  })
+}
+   
