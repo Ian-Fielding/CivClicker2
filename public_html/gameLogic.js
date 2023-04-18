@@ -1,5 +1,16 @@
 const TESTING=true; //set to false in release!!
 
+
+// Checks for a cookie, and if it exists, retrieves the username
+if(document.cookie == ""){
+	window.location.href = "/index.html";
+}
+const cookie = document.cookie;
+const jsonValue = JSON.parse(decodeURIComponent(cookie).split('login=')[1].replace(/^j:/, ''));
+const username = jsonValue.username;
+
+
+
 let params={
 	numWheat: 0,
 	numStone: 0,
@@ -9,8 +20,6 @@ let params={
 	numStonePiles: 1,
 	numLumberyards: 1,
 };// TODO load these from database
-
-
 
 // TODO Come up with better styling here
 function init(){
@@ -142,7 +151,6 @@ function updateDOM(){
 	document.getElementById("stonepile-button").innerHTML=`Stone Piles: ${params.numStonePiles}`;
 	document.getElementById("lumberyard-button").innerHTML=`Lumberyards: ${params.numLumberyards}`;
 }
-
 
 
 

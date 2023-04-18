@@ -5,15 +5,11 @@ const cookieParser = require('cookie-parser');
 const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
-const port = 5000;
-app.use(express.static("public_html"));
-app.use(express.json());
+const port = 80;
 
 let sessions = {};
 
 var crypto = require('crypto');
-var hash = crypto.createHash('sha3-256');
-
 
 /**
  * SESSION MANAGEMENT
@@ -45,15 +41,19 @@ function authenticate(req, res, next){
 			return next();
 		}
 	}
+	if (req.path === '/index.html') {
+		return next();
+	  }
+	  res.redirect('/index.html');
 }
 
 function redirectIndex(req, res) {
-	// Redirection Location
+	res.redirect('/home.html');
 }
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/', authenticate, redirectIndex);
+app.use(/^\/$/, authenticate, redirectIndex);
 app.use(express.static('public_html'));
 
 
@@ -61,21 +61,19 @@ app.use(express.static('public_html'));
  * MONGO DB
  */
 
+const mongodb = "mongodb+srv://username:a@finalprojectdb.r64le2h.mongodb.net/?retryWrites=true&w=majority";
 
-const mongodb = "input mongo link"
-
-/*
 // Create the connection to MongoDB and ensure connection works
 mongoose.connect(mongodb)
 	.then(() => console.log('MongoDB Connection Successful'))
 	.catch((err) => console.error('MongoDB Error Caught', err));
-*/
+
 
 // Define User schema
 const userSchema = new mongoose.Schema({
 	username: String,
 	salt: String,
-	hash: String
+	hash: String,
 });
 const User = mongoose.model('User', userSchema);
 
@@ -113,21 +111,21 @@ app.post('/add/user/', async (req, res) => {
 
 // Login User
 app.post('/account/login', (req, res) => {
-	let username = req.body.user;
-	let password = req.body.pass;
-	User.findOne({ username: username, password: password })
+	const username = req.body.user;
+	const password = req.body.pass;
+	User.findOne({ username: username })
 		.then((user) => {
 		if (user) {
-		 let existingSalt = user[0].salt;
+		 let existingSalt = user.salt;
 		 let toHash = password + existingSalt;
 		 var hash = crypto.createHash('sha3-256');
 		 let data = hash.update(toHash, 'utf-8');
 		 let newHash = data.digest('hex');
 
-		 if (newHash == user[0].hash){
-		 let sessionId = addSession(username);
-		 res.cookie('login', { username: username, sid: sessionId }, { maxAge: 100000 });
-		 res.json({ success: true });
+		 if (newHash == user.hash){
+		 	let sessionId = addSession(username);
+		 	res.cookie('login', { username: username, sid: sessionId }, { maxAge: 100000 });
+		 	res.json({ success: true });
 		 }
 		} else {
 		 res.json({ success: false });
@@ -135,6 +133,14 @@ app.post('/account/login', (req, res) => {
 		})
 		.catch((err) => console.error('Error Caught', err));
 });
+
+app.post('/account/resources', (req, res) => {
+	const username = req.body.user;
+	User.findOne({ username: username })
+		.then((user) => {
+
+		})
+})
 
 app.listen(port, function() {
 	console.log(`App listening at http://localhost:${port}`);
