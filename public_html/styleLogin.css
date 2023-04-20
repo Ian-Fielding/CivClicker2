@@ -1,0 +1,52 @@
+#loginTitle {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    top: 6%;
+    left:50%;
+}
+
+body {
+    background-color: cornsilk;
+    border:2px black;
+}
+
+#createUser {
+
+    position:absolute;
+    bottom:60%;
+    left:20%;
+    
+}
+
+#chatContent {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: 3px solid royalblue;
+    margin-left:16%;
+    box-sizing: border-box;
+    width:65%;
+    left:50%;
+    padding: 200px;
+  }
+
+#signIn {
+
+    position:absolute;
+    bottom: 60%;
+    left:60%;
+
+
+}
+
+#signInTitle {
+    position:absolute;
+    top:10%;
+    left:60%;
+}
+
+#createUserTitle {
+
+    position:absolute;
+    top:10%;
+    left:20%;
+
+}
