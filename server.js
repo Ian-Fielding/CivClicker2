@@ -142,6 +142,7 @@ app.post('/account/resources', (req, res) => {
 		})
 })
 
+
 app.listen(port, function() {
 	console.log(`App listening at http://localhost:${port}`);
 });

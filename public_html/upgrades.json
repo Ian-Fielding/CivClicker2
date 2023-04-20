@@ -1,0 +1,7 @@
+{
+	"upg1_1": {
+		"name": "The Wheel",
+		"desc": "Workers require half as much wheat",
+		"effect": "workers.forEach((w) => w.foodpersec/=2);"
+	}
+}
