@@ -14,26 +14,28 @@
 
 	<div id="chatContent" class="chat-box">
 	
-		<h2 class="Title" id="createUserTitle"> Create User </h2>
-		<div class="user-section" id="createUser">
-			<h2 class="form">Username: </h2>
-			<textarea id="Username" name="Username" rows="1" class="userForm" cols="40"></textarea>
-			<br>
-			<h2 class="form">Password: </h2>
-			<textarea id="Password" name="Password" rows="1" class="userForm" cols="40"></textarea>
-			<br>
-			<input id="addUser" type="button" class="submitForm" value="Add User">
-		</div>
-		
-		<h2 class="Title" id="signInTitle"> Sign In </h2>
-		<div class="user-section" id="signIn">
-			<h2 class="form">Username: </h2>
-			<textarea id="SigUsername" name="SigUsername" rows="1" class="userForm" cols="40"></textarea>
-			<br>
-			<h2 class="form">Password: </h2>
-			<textarea id="SigPassword" name="SigPassword" rows="1" class="userForm" cols="40"></textarea>
-			<br>
-			<input id="login" type="button" class="submitForm" value="Login">
+		<div id="contentContainer">
+			<div class="user-section" id="createUser">
+				<h2 class="Title" id="createUserTitle"> Create User </h2>
+				<h2 class="form">Username: </h2>
+				<input id="CreateUsername" name="CreateUsername" type="text" required>
+				<br>
+				<h2 class="form">Password: </h2>
+				<input id="CreatePassword" name="CreatePassword" type="password" required>
+				<br>
+				<input id="addUser" type="button" class="submitForm" value="Add User">
+			</div>
+			
+			<div class="user-section" id="signIn">
+				<h2 class="Title" id="signInTitle"> Sign In </h2>
+				<h2 class="form">Username: </h2>
+				<input id="Username" name="Username" type="text" required>
+				<br>
+				<h2 class="form">Password: </h2>
+				<input id="Password" name="Password" type="password" required>
+				<br>
+				<input id="login" type="button" class="submitForm" value="Login">
+			</div>
 		</div>
 
 	</div>

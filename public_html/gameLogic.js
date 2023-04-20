@@ -1,13 +1,13 @@
 const TESTING=true; //set to false in release!!
 
-/*
+
 // Checks for a cookie, and if it exists, retrieves the username
 if(document.cookie == ""){
 	window.location.href = "/index.html";
 }
 const cookie = document.cookie;
 const jsonValue = JSON.parse(decodeURIComponent(cookie).split('login=')[1].replace(/^j:/, ''));
-const username = jsonValue.username;*/
+const username = jsonValue.username;
 
 
 let upgrades={
@@ -532,9 +532,9 @@ let era;
 
 
 let params={
-	wheat: 1000, // Number
-	stone: 1000, // Number
-	wood: 1000, // Number
+	wheat: 0, // Number
+	stone: 0, // Number
+	wood: 0, // Number
 
 	science: 0, // Number
 

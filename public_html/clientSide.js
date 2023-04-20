@@ -1,11 +1,11 @@
 // Create Account Section Inputs
-let username = document.getElementById('Username');
-let password = document.getElementById('Password');
+let username = document.getElementById('CreateUsername');
+let password = document.getElementById('CreatePassword');
 let addUserButton = document.getElementById('addUser');
 
 // Login Section Inputs
-let loginU = document.getElementById('SigUsername');
-let loginP = document.getElementById('SigPassword');
+let loginU = document.getElementById('Username');
+let loginP = document.getElementById('Password');
 let loginButton = document.getElementById('login');
 
 addUserButton.addEventListener('click', createUser);
