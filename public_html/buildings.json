@@ -1,0 +1,26 @@
+{
+	"granaries": {
+		"name": "Granary",
+		"cost": {
+			"wheat": "100",
+			"stone": "20",
+			"wood": "100"
+		}
+	},
+	"lumberyards": {
+		"name": "Lumberyard",
+		"cost": {
+			"wheat": "50",
+			"stone": "50",
+			"wood": "200"
+		}
+	},
+	"stonePiles": {
+		"name": "Stone Pile",
+		"cost": {
+			"wheat": "50",
+			"stone": "200",
+			"wood": "50"
+		}
+	}
+}

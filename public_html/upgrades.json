@@ -2,6 +2,421 @@
 	"upg1_1": {
 		"name": "The Wheel",
 		"desc": "Workers require half as much wheat",
-		"effect": "workers.forEach((w) => w.foodpersec/=2);"
+		"effect": "foodpersec/=2;",
+		"cost": {
+			"stone": "300",
+			"wood": "200"
+		}
+	},
+	"upg1_2": {
+		"name": "Writing",
+		"desc": "Workers produce twice as much science",
+		"effect": "power.science*=2;",
+		"cost": {
+			"wood": "300",
+			"wheat": "100",
+			"science": "20"
+		}
+	},
+	"upg1_3": {
+		"name": "Mining",
+		"desc": "Workers proudce twice as much stone",
+		"effect": "power.stone*=2;",
+		"cost": {
+			"stone": "300",
+			"wheat": "100",
+			"science": "10"
+		}
+	},
+	"upg1_4": {
+		"name": "Agriculture",
+		"desc": "Workers produce twice as much wheat",
+		"effect": "power.wheat*=2;",
+		"cost": {
+			"wheat": "450",
+			"science": "10",
+			"wood": "100",
+			"stone": "100"
+		}
+	},
+	"upg1_5": {
+		"name": "Woodworking",
+		"desc": "Workers produce twice as much wood",
+		"effect": "power.wood*=2;",
+		"cost": {
+			"wood": "300",
+			"wheat": "100",
+			"science": "10"
+		}
+	},
+	"upg1_6": {
+		"name": "Brickmaking",
+		"desc": "Allows construction of stone huts",
+		"effect": "",
+		"cost": {
+			"science": "25",
+			"stone": "300",
+			"wood": "50"
+		}
+	},
+	"upg1_7": {
+		"name": "Better storage",
+		"desc": "All basic resource storage becomes 25% larger",
+		"effect": "power.granaries*=1.25;power.stonePiles*=1.25;power.lumberyards*=1.25;",
+		"cost": {
+			"science": "30",
+			"wood": "300",
+			"stone": "300",
+			"wheat": "300"
+		}
+	},
+	"upg1_8": {
+		"name": "Masonry",
+		"desc": "All buildings become 20% cheaper to construct",
+		"effect": "buildingcost*=0.8;",
+		"cost": {
+			"science": "20",
+			"stone": "600"
+		}
+	},
+	"upg2_1": {
+		"name": "Construction",
+		"desc": "Allows construction of armories",
+		"effect": "",
+		"cost": {
+			"science": "40",
+			"wood": "600",
+			"stone": "600"
+		}
+	},
+	"upg2_2": {
+		"name": "Bronze Tools",
+		"desc": "All workers become 10% more effective",
+		"effect": "power.science*=1.1;power.wheat*=1.1;power.stone*=1.1;power.wood*=1.1;power.warriors*=1.1;",
+		"cost": {
+			"science": "50",
+			"stone": "750",
+			"wood": "500",
+			"wheat": "550"
+		}
+	},
+	"upg2_3": {
+		"name": "Scythes",
+		"desc": "Workers harvest wheat 50% more efficiently",
+		"effect": "power.wheat*=1.5;",
+		"cost": {
+			"science": "60",
+			"stone": "750",
+			"wheat": "1000",
+			"wood": "750"
+		}
+	},
+	"upg2_4": {
+		"name": "Pickaxes",
+		"desc": "Workers mine stone 50% more efficiently",
+		"effect": "power.stone*=1.5;",
+		"cost": {
+			"science": "60",
+			"stone": "1000",
+			"wheat": "750",
+			"wood": "750"
+		}
+	},
+	"upg2_5": {
+		"name": "Axes",
+		"desc": "Workers cut wood 50% more efficiently",
+		"effect": "woodpwer*=1.5;",
+		"cost": {
+			"science": "60",
+			"stone": "750",
+			"wheat": "750",
+			"wood": "1000"
+		}
+	},
+	"upg2_6": {
+		"name": "Bronze Swords",
+		"desc": "Warriors are 100% more effective",
+		"effect": "power.warriors*=2;",
+		"cost": {
+			"science": "80",
+			"stone": "1000",
+			"wheat": "1000"
+		}
+	},
+	"upg2_7": {
+		"name": "Walls",
+		"desc": "Allows the construction of walls",
+		"effect": "",
+		"cost": {
+			"science": "80",
+			"stone": "1000",
+			"wood": "1000"
+		}
+	},
+	"upg2_8": {
+		"name": "Tactics",
+		"desc": "Allows workers to become archers and spearmen",
+		"effect": "",
+		"cost": {
+			"science": "100",
+			"wheat": "1000",
+			"wood": "1000"
+		}
+	},
+	"upg3_1": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_2": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_3": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_4": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_5": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_6": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_7": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg3_8": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_1": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_2": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_3": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_4": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_5": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_6": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_7": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg4_8": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_1": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_2": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_3": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_4": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_5": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_6": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_7": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg5_8": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_1": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_2": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_3": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_4": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_5": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_6": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_7": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
+	},
+	"upg6_8": {
+		"name": "",
+		"desc": "",
+		"effect": "",
+		"cost": {
+			"": ""
+		}
 	}
 }

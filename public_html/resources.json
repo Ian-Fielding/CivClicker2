@@ -1,0 +1,17 @@
+{
+	"wheat": {
+		"name": "Wheat",
+		"unlockAfter": "",
+		"storage": "granaries"
+	},
+	"wood": {
+		"name": "Wood",
+		"unlockAfter": "",
+		"storage": "lumberyards"
+	},
+	"stone": {
+		"name": "Stone",
+		"unlockAfter": "",
+		"storage": "stonePiles"
+	}
+}
