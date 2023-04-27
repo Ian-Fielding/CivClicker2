@@ -9,6 +9,8 @@ const cookie = document.cookie;
 const jsonValue = JSON.parse(decodeURIComponent(cookie).split('login=')[1].replace(/^j:/, ''));
 const username = jsonValue.username;
 
+console.log(username);
+
 
 // objects to be loaded from .json files
 let upgrades,buildings,resources,power;
@@ -41,14 +43,41 @@ let params={
 	purchasedUpgrades: [], // [String]
 };
 
+// Loads the Params
+
 function loadParams(){
-	// TODO Load user parameters from the database
-	// params = ...
+	const user = username;
+	fetch('/load/params/', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ user })
+	})
+	.then((response) => response.json())
+	.then((params1) => {
+		params = params1;
+		console.log(params);
+	})
+	.catch((err) => console.error('Error Caught', err));
 }
 
-function saveParams(){
-	// TODO save these parameters to the database
-}
+// Saves the Params
+
+async function saveParams() {
+	const user = username;
+	const updatedParams = params;
+	try {
+	  const response = await fetch('/save/params', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ user, params: updatedParams }),
+	  });
+	  const data = await response.json();
+	  console.log(data);
+	} catch (error) {
+	  console.error('Error Caught', error);
+	}
+  }
+
 
 // reinitializes game
 function init(){

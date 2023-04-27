@@ -74,6 +74,22 @@ const userSchema = new mongoose.Schema({
 	username: String,
 	salt: String,
 	hash: String,
+	params : {
+		wheat: Number,
+		stone: Number,
+		wood: Number,
+		science: Number,
+		workersUnemployed: Number,
+		workersWheat: Number,
+		workersStone: Number,
+		workersWood: Number,
+		workersWarriors: Number,
+		granaries: Number,
+		stonePiles: Number,
+		lumberyards: Number,
+		purchasedUpgrades: [String]
+	  },
+	friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }]
 });
 const User = mongoose.model('User', userSchema);
 
@@ -97,8 +113,28 @@ app.post('/add/user/', async (req, res) => {
 		var hash = crypto.createHash('sha3-256');
 		let data = hash.update(toHash, 'utf-8');
 		let newHash = data.digest('hex');
-
-		const newUser = new User({username: username, salt: newSalt, hash: newHash});
+		
+		let newParams = {
+			wheat: 0, // Number
+			stone: 0, // Number
+			wood: 0, // Number
+		
+			science: 0, // Number
+		
+			workersUnemployed: 0, //Number
+			workersWheat: 0, //Number
+			workersStone: 0, //Number
+			workersWood: 0, //Number
+			workersWarriors: 0, //Number
+		
+			granaries: 1, // Number
+			stonePiles: 1, // Number
+			lumberyards: 1, // Number
+		
+			purchasedUpgrades: [], // [String]
+		};
+		
+		const newUser = new User({username: username, salt: newSalt, hash: newHash, params: newParams});
 		newUser.save()
 		.then(() => res.send('User added successfully'))
 		.catch((err) => console.error('Error Caught', err));
@@ -134,14 +170,35 @@ app.post('/account/login', (req, res) => {
 		.catch((err) => console.error('Error Caught', err));
 });
 
-app.post('/account/resources', (req, res) => {
+app.post('/load/params', (req, res) => {
 	const username = req.body.user;
 	User.findOne({ username: username })
-		.then((user) => {
+	  .then((user) => {
+		res.json(user.params);
+	  })
+	  .catch((err) => {
+		// Handle error
+		res.status(500).json({ error: 'Unable to load user params' });
+	  });
+  });
 
-		})
-})
 
+app.post('/save/params', (req, res) => {
+	const { user, params } = req.body;
+	User.findOneAndUpdate(
+	  { username: user },
+	  { $set: { params } },
+	  { new: true },
+	  (err, user) => {
+		if (err) {
+		  console.error(err);
+		  res.status(500).json({ error: 'Unable to save user params' });
+		} else {
+		  res.json({ success: true });
+		}
+	  },
+	);
+});
 
 app.listen(port, function() {
 	console.log(`App listening at http://localhost:${port}`);
