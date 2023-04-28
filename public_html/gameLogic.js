@@ -83,6 +83,9 @@ function init() {
 
 
 function getMaxStorage(resource){
+	if(TESTING)
+		return Number.MAX_VALUE;
+
 	if(resource=="science")
 		return Number.MAX_VALUE;
 	let obj=resources[resource];
@@ -101,6 +104,15 @@ function initDOM() {
     saveText.innerHTML = `Hello, ${username}!`
     document.getElementById("save").appendChild(saveText);
     document.getElementById("save").appendChild(save);
+    logout = document.createElement("button");
+    logout.onclick = function(){
+    	document.cookie="";
+	    window.location.href = "/index.html";
+    }
+    logout.innerHTML = "Logout";
+    document.getElementById("save").appendChild(logout);
+    
+
     document.getElementById("save").appendChild(document.createElement("hr"));
 
     // basic DOM nodes for future use
@@ -108,14 +120,16 @@ function initDOM() {
     let buildingsDOM = document.getElementById("buildings");
     let workersDOM = document.getElementById("worker-list");
     let deallocWorkersDOM = document.getElementById("dealloc-workers");
+    resourcesDOM.innerHTML="";
+    buildingsDOM.innerHTML="";
+    workersDOM.innerHTML="";
+    deallocWorkersDOM.innerHTML="";
 
     // initializes resources
     for (const resource in resources) {
         let obj = resources[resource];
         if(obj.isButton=="false")
         	continue;
-
-        console.log(obj);
 
 
         // sets up button
@@ -126,7 +140,7 @@ function initDOM() {
         // on click, add resource to params
         but.onclick = function() {
             if (TESTING)
-                params[resource] += 20;
+                params[resource] += 100;
             else
                 params[resource]++;
 
@@ -353,6 +367,9 @@ setInterval(function() {
     	let maxStorage = getMaxStorage(resource);
         if (params[resource] > maxStorage)
             params[resource] = maxStorage;
+
+        if(TESTING)
+        	params[resource]+=10;
     };
 
 
@@ -381,8 +398,8 @@ setInterval(function() {
 function getEraUpgrades() {
     let arr = [];
     for (let i = 1; i <= 8; i++)
-        if (!params.purchasedUpgrades.includes(`upg${era}_${i}}`))
-            arr.push(`upg${era}_${i}}`);
+        if (!params.purchasedUpgrades.includes(`upg${era}_${i}`))
+            arr.push(`upg${era}_${i}`);
     return arr;
 }
 
@@ -391,7 +408,7 @@ function update() {
     // if all upgrades purchased, advance era
     if (era < 6 && getEraUpgrades().length == 0)
         init();
-
+    
     updateDOM();
 }
 

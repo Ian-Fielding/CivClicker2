@@ -117,8 +117,8 @@ app.post('/add/user/', async (req, res) => {
             res.send('Username already exists');
         } else {
             let newSalt = Math.floor((Math.random() * 1000000));
-            var toHash = password + newSalt;
-            var hash = crypto.createHash('sha3-256');
+            let toHash = password + newSalt;
+            let hash = crypto.createHash('sha3-256');
             let data = hash.update(toHash, 'utf-8');
             let newHash = data.digest('hex');
 
@@ -169,7 +169,7 @@ app.post('/account/login', (req, res) => {
             if (user) {
                 let existingSalt = user.salt;
                 let toHash = password + existingSalt;
-                var hash = crypto.createHash('sha3-256');
+                let hash = crypto.createHash('sha3-256');
                 let data = hash.update(toHash, 'utf-8');
                 let newHash = data.digest('hex');
 
@@ -177,8 +177,7 @@ app.post('/account/login', (req, res) => {
                     let sessionId = addSession(username);
                     res.cookie('login', {
                         username: username,
-                        sid: sessionId
-                    }, {
+                        sid: sessionId,
                         maxAge: 100000
                     });
                     res.json({

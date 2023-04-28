@@ -15,10 +15,22 @@ loginButton.addEventListener('click', loginUser);
 function createUser() {
 	const user = username.value.trim();
 	const pass = password.value.trim();
+
+	if(user.length==0||pass.length==0){
+		alert("Username and password must be nonempty!");
+		return;
+	}
 	fetch('/add/user/', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ user, pass })
+	})
+	.then(response => response.text())
+	.then(function(res){
+		if(res=="User added successfully")
+			alert(`User ${user} added successfully`);
+		else
+			alert(`User ${user} already exists`);
 	})
 	.catch((err) => console.error('Error Caught', err));
 }
@@ -27,6 +39,11 @@ function createUser() {
 function loginUser(){
 	const user = loginU.value.trim();
 	const pass = loginP.value.trim();
+	if(user.length==0||pass.length==0){
+		alert("Username and password must be nonempty!");
+		return;
+	}
+
 	fetch('/account/login', {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },

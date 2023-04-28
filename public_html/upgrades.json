@@ -125,7 +125,7 @@
 	"upg2_5": {
 		"name": "Axes",
 		"desc": "Workers cut wood 50% more efficiently",
-		"effect": "woodpwer*=1.5;",
+		"effect": "power.wood*=1.5;",
 		"cost": {
 			"science": "60",
 			"stone": "750",
