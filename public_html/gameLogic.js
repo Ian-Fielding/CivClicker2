@@ -43,45 +43,20 @@ let params={
 	purchasedUpgrades: [], // [String]
 };
 
-// Loads the Params
-
-function loadParams(){
-	const user = username;
-	fetch('/load/params/', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ user })
-	})
-	.then((response) => response.json())
-	.then((params1) => {
-		params = params1;
-		console.log(params);
-	})
-	.catch((err) => console.error('Error Caught', err));
-}
 
 // Saves the Params
 
 async function saveParams() {
-	const user = username;
-	const updatedParams = params;
-	try {
-	  const response = await fetch('/save/params', {
+	fetch('/save/params', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ user, params: updatedParams }),
-	  });
-	  const data = await response.json();
-	  console.log(data);
-	} catch (error) {
-	  console.error('Error Caught', error);
-	}
-  }
+		body: JSON.stringify({ username: username, params: params }),
+	});
+}
 
 
 // reinitializes game
 function init(){
-	loadParams(); //TODO Move this into a fetch
 
 	// apply all purchased upgrades
 	params.purchasedUpgrades.forEach(function(property){
@@ -331,6 +306,11 @@ setInterval(function(){
 
 },1000);
 
+setInterval(function(){
+	saveParams();
+	console.log("Autosaved progress!");
+},60000);
+
 // returns available upgrades for this era
 function getEraUpgrades(){
 	let arr=[];
@@ -390,13 +370,21 @@ let resPromise = fetch("http://localhost:80/resources.json")
 	.then(res => res.json());
 let powPromise = fetch("http://localhost:80/power.json")
 	.then(res => res.json());
+let parPromise = fetch(`http://localhost:80/load/params/${username}`)
+	.then(res => res.json());
 
-Promise.all([upgPromise,buiPromise,resPromise,powPromise])
+Promise.all([upgPromise,buiPromise,resPromise,powPromise,parPromise])
 	.then(function(objs){
 		upgrades=objs[0];
 		buildings=objs[1];
 		resources=objs[2];
 		power=objs[3];
+		if(objs[4].result != "No saved data"){
+			params=objs[4];
+		}
+
+		console.log("Params is")
+		console.log(params);
 		init();
 	});
 

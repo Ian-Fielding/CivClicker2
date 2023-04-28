@@ -170,34 +170,29 @@ app.post('/account/login', (req, res) => {
 		.catch((err) => console.error('Error Caught', err));
 });
 
-app.post('/load/params', (req, res) => {
-	const username = req.body.user;
+app.get('/load/params/:username', (req, res) => {
+	const username = req.params["username"];
 	User.findOne({ username: username })
 	  .then((user) => {
 		res.json(user.params);
 	  })
 	  .catch((err) => {
 		// Handle error
-		res.status(500).json({ error: 'Unable to load user params' });
+		res.json({ result: "No saved data" });
 	  });
   });
 
 
-app.post('/save/params', (req, res) => {
-	const { user, params } = req.body;
-	User.findOneAndUpdate(
-	  { username: user },
-	  { $set: { params } },
-	  { new: true },
-	  (err, user) => {
-		if (err) {
-		  console.error(err);
-		  res.status(500).json({ error: 'Unable to save user params' });
-		} else {
-		  res.json({ success: true });
-		}
-	  },
-	);
+app.post('/save/params', async function(req, res){
+	const username=req.body.username;
+	const params=req.body.params;
+
+	let user=await User.findOne({username: username});
+	if(user==null)
+		res.status(500);
+	
+	user.params=params;
+	user.save();
 });
 
 app.listen(port, function() {
