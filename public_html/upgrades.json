@@ -1,8 +1,8 @@
 {
 	"upg1_1": {
 		"name": "The Wheel",
-		"desc": "Workers require half as much wheat",
-		"effect": "foodpersec/=2;",
+		"desc": "Workers require 20% as much wheat",
+		"effect": "foodpersec*=0.8;",
 		"cost": {
 			"stone": "300",
 			"wood": "200"
