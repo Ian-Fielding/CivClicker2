@@ -90,7 +90,6 @@ const userSchema = new mongoose.Schema({
 		purchasedUpgrades: [String]
 	  },
 	friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }],
-	friendsPending: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }]
 });
 const User = mongoose.model('User', userSchema);
 
@@ -200,83 +199,6 @@ app.post('/save/params', (req, res) => {
 	  },
 	);
 });
-
-// FRIEND REQUESTS
-
-app.post('/users/:id/request', async (req, res) => {
-	try {
-	  const user = req.params.user;
-	  const friendUsername = req.body.friendUsername;
-  
-	  // Find the user and friend in the database
-	  const username = await User.findOne({ username: user });
-	  const friend = await User.findOne({ username: friendUsername });
-  
-	  // Check if the friend exists in the database
-	  if (!friend) {
-		return res.status(404).json({ message: 'Friend not found' });
-	  }
-  
-	  // Check if the user has already sent a friend request to this friend
-	  if (friend.friendsPending.includes(username._id)) {
-		return res.status(400).json({ message: 'Friend request already sent' });
-	  }
-  
-	  // Add the friend request to the user's pending friend requests
-	  friend.friendsPending.push(friend._id);
-	  await friend.save();
-  
-	  res.status(200).json({ message: 'Friend request sent successfully' });
-	} catch (error) {
-	  console.error(error);
-	  res.status(500).json({ message: 'Server error' });
-	}
-  });
-
-
-app.post('/accept/friend', async (req, res) => {
-	const { requestingUserId, acceptingUserId } = req.body;
-	try {
-	  await acceptFriendRequest(requestingUserId, acceptingUserId);
-	  res.sendStatus(200);
-	} catch (err) {
-	  console.error(err);
-	  res.sendStatus(500);
-	}
-});
-
-
-async function acceptFriendRequest(requestingUserId, acceptingUserId) {
-	try {
-	  const requestingUser = await User.findById(requestingUserId);
-	  const acceptingUser = await User.findById(acceptingUserId);
-  
-	  // Check if the accepting user is already a friend of the requesting user
-	  if (requestingUser.friends.includes(acceptingUserId)) {
-		throw new Error('User is already a friend');
-	  }
-  
-	  // Add the accepting user to the requesting user's friends list
-	  requestingUser.friends.push(acceptingUserId);
-	  await requestingUser.save();
-  
-	  // Add the requesting user to the accepting user's friends list
-	  acceptingUser.friends.push(requestingUserId);
-	  await acceptingUser.save();
-	} catch (err) {
-	  console.error(err);
-	  throw new Error('Failed to accept friend request');
-	}
-}
-
-// Search for users by keyword, can be used to add friends
-app.get('/search/users/:keyword', (req, res) => {
-	const keyword = req.params.keyword;
-	const regex = new RegExp(keyword, 'i');
-	User.find({username: regex}).exec()
-	  .then((users) => res.end(JSON.stringify(users, null, 2)))
-	  .catch((err) => console.error('Error Caught', err))
-  });
 
 app.listen(port, function() {
 	console.log(`App listening at http://localhost:${port}`);
