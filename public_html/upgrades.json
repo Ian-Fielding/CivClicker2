@@ -1,8 +1,8 @@
 {
 	"upg1_1": {
 		"name": "The Wheel",
-		"desc": "Workers require half as much wheat",
-		"effect": "foodpersec/=2;",
+		"desc": "Workers require 20% as much wheat",
+		"effect": "foodpersec*=0.8;",
 		"cost": {
 			"stone": "300",
 			"wood": "200"
@@ -125,7 +125,7 @@
 	"upg2_5": {
 		"name": "Axes",
 		"desc": "Workers cut wood 50% more efficiently",
-		"effect": "woodpwer*=1.5;",
+		"effect": "power.wood*=1.5;",
 		"cost": {
 			"science": "60",
 			"stone": "750",

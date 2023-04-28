@@ -1,17 +1,26 @@
 {
 	"wheat": {
 		"name": "Wheat",
+		"isButton": "true",
 		"unlockAfter": "",
 		"storage": "granaries"
 	},
 	"wood": {
 		"name": "Wood",
+		"isButton": "true",
 		"unlockAfter": "",
 		"storage": "lumberyards"
 	},
 	"stone": {
 		"name": "Stone",
+		"isButton": "true",
 		"unlockAfter": "",
 		"storage": "stonePiles"
+	},
+	"science": {
+		"name": "Science",
+		"isButton": "false",
+		"unlockAfter": "",
+		"storage": "null"
 	}
 }
