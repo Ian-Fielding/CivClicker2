@@ -392,7 +392,7 @@ setInterval(function() {
 setInterval(function() {
     saveParams();
     console.log("Autosaved progress!");
-}, 60000);
+}, 10000);
 
 // returns available upgrades for this era
 function getEraUpgrades() {
