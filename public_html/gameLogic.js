@@ -11,6 +11,8 @@ const username = jsonValue.username;
 
 console.log(`Logged in as ${username}`);
 
+
+// Adds Player Search
 let searchPlayers = document.createElement("textarea");
 document.getElementById("search").appendChild(searchPlayers);
 
@@ -76,7 +78,11 @@ function findUsers(){
         })
         })
         .catch((err) => console.error('Error Caught', err));
-    };
+};
+
+function battleUser(){
+    
+}
 
 
 // reinitializes game
@@ -114,10 +120,19 @@ function getMaxStorage(resource){
 
 // TODO Come up with better styling here
 function initDOM() {
+    // Creates Search Button
     let searchButton = document.createElement("button");
     searchButton.innerHTML = "Find Friends";
     searchButton.onclick = findUsers;
     document.getElementById("search").appendChild(searchButton);
+
+    // Creates Battle Button
+    let battlePlayers = document.createElement("button");
+    battlePlayers.innerHTML = "BATTLE!";
+    searchButton.onclick = battleUser;
+    document.getElementById("search").appendChild(battlePlayers);
+
+
     // save button & welcome text
     let save = document.createElement("button");
     save.onclick = saveParams;
