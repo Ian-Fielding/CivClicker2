@@ -1,5 +1,5 @@
 const TESTING = true; //set to false in release!!
-
+let searching = false;
 
 // Checks for a cookie, and if it exists, retrieves the username
 if (document.cookie == "") {
@@ -80,14 +80,55 @@ function findUsers(){
         .catch((err) => console.error('Error Caught', err));
 };
 
-function battleUser(){
-    
+function battleSearching(){
+    if (!searching){
+        const resultsDiv = document.getElementById('battleSearch');
+        const itemDiv = document.createElement('div');
+        const name = document.createElement('h3');
+        name.textContent = "Searching...";
+        itemDiv.appendChild(name);
+        let cancel = document.createElement("button");
+        cancel.innerHTML = "Cancel Search";
+        cancel.onclick = cancelSearch;
+        itemDiv.appendChild(cancel);
+        resultsDiv.appendChild(itemDiv);
+
+        fetch('/add/searcher', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: username,
+            }),
+        });
+
+        searching = true;
+    }
+}
+
+function cancelSearch(){
+    if(searching){
+        const resultsDiv = document.getElementById('battleSearch');
+        resultsDiv.innerHTML = '';
+        fetch(`/cancel/searcher/${username}`)
+        .then((response) => response)
+        .catch((err) => console.error('Error Caught', err));
+
+        searching = false;
+    }
+}
+
+// STILL IN PROGRESS, NEED TO SET ON AN INTERVAL TO CHECK
+function checkForBattle(){
+    if (searching){
+        fetch(`/found/searcher/${username}`)
+    }
 }
 
 
 // reinitializes game
 function init() {
-
     // apply all purchased upgrades
     params.purchasedUpgrades.forEach(function(property) {
         eval(upgrades[property].effect);
@@ -127,10 +168,10 @@ function initDOM() {
     document.getElementById("search").appendChild(searchButton);
 
     // Creates Battle Button
-    let battlePlayers = document.createElement("button");
-    battlePlayers.innerHTML = "BATTLE!";
-    searchButton.onclick = battleUser;
-    document.getElementById("search").appendChild(battlePlayers);
+    let battleSearch = document.createElement("button");
+    battleSearch.innerHTML = "Search For Battle";
+    battleSearch.onclick = battleSearching;
+    document.getElementById("search").appendChild(battleSearch);
 
 
     // save button & welcome text
