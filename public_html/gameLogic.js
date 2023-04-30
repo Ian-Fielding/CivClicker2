@@ -47,6 +47,11 @@ let params = {
     purchasedUpgrades: [], // [String]
 };
 
+// returns integer representing the player's military strength
+function battlePower(){
+    return Math.ceil(power.warriors * params.workersWarriors);
+}
+
 
 // Saves the Params
 
@@ -64,6 +69,7 @@ async function saveParams() {
 }
 
 function findUsers(){
+
     const resultsDiv = document.getElementById('searchResults');
     resultsDiv.innerHTML = ''; // Clear all search results
     fetch(`/search/users/${searchPlayers.value}`)
@@ -100,6 +106,7 @@ function battleSearching(){
             },
             body: JSON.stringify({
                 user: username,
+                battlePower: battlePower(),
             }),
         });
 

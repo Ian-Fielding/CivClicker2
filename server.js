@@ -99,7 +99,8 @@ const User = mongoose.model('User', userSchema);
 
 // Define Searching Schema
 const searchingUsers = new mongoose.Schema({
-    searcher: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }]
+    searcher: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema'}],
+    power: Number,
 })
 const Searcher = new mongoose.model('Searchers', searchingUsers);
 
@@ -112,7 +113,8 @@ app.post('/add/searcher', async (req, res) =>{
         });
         if (user){
             const searchingUser = new Searcher({
-                searcher: user
+                searcher: user,
+                power: req.body.battlePower
             });
             searchingUser.save()
             .then(() => res.send('User added successfully'))
@@ -275,6 +277,7 @@ app.post('/account/login', (req, res) => {
 });
 
 app.get('/load/params/:username', (req, res) => {
+
     const username = req.params["username"];
     User.findOne({
             username: username
@@ -374,6 +377,7 @@ async function acceptFriendRequest(requestingUserId, acceptingUserId) {
 
 // Search for users by keyword, can be used to add friends
 app.get('/search/users/:keyword', (req, res) => {
+
 	const keyword = req.params.keyword;
 	const regex = new RegExp(keyword, 'i');
 	User.find({username: regex}).exec()
