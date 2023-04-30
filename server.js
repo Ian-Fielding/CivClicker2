@@ -224,9 +224,9 @@ app.post('/save/params', async function(req, res) {
 
 // FRIEND REQUESTS
 
-app.post('/users/:id/request', async (req, res) => {
+app.post('/users/request', async (req, res) => {
 	try {
-	  const user = req.params.user;
+	  const user = req.body.user;
 	  const friendUsername = req.body.friendUsername;
   
 	  // Find the user and friend in the database
@@ -265,7 +265,6 @@ app.post('/accept/friend', async (req, res) => {
 	  res.sendStatus(500);
 	}
 });
-
 
 async function acceptFriendRequest(requestingUserId, acceptingUserId) {
 	try {
