@@ -11,6 +11,8 @@ const username = jsonValue.username;
 
 console.log(`Logged in as ${username}`);
 
+let searchPlayers = document.createElement("textarea");
+document.getElementById("search").appendChild(searchPlayers);
 
 // objects to be loaded from .json files
 let upgrades, buildings, resources, power;
@@ -59,6 +61,23 @@ async function saveParams() {
     });
 }
 
+function findUsers(){
+    const resultsDiv = document.getElementById('searchResults');
+    resultsDiv.innerHTML = ''; // Clear all search results
+    fetch(`/search/users/${searchPlayers.value}`)
+    .then((response) => response.json())
+    .then((users) => {
+        users.forEach((user) =>{
+            const itemDiv = document.createElement('div');
+            const name = document.createElement('h3');
+            name.textContent = user.username;
+            itemDiv.appendChild(name);
+            resultsDiv.appendChild(itemDiv);
+        })
+        })
+        .catch((err) => console.error('Error Caught', err));
+    };
+
 
 // reinitializes game
 function init() {
@@ -95,7 +114,10 @@ function getMaxStorage(resource){
 
 // TODO Come up with better styling here
 function initDOM() {
-
+    let searchButton = document.createElement("button");
+    searchButton.innerHTML = "Find Friends";
+    searchButton.onclick = findUsers;
+    document.getElementById("search").appendChild(searchButton);
     // save button & welcome text
     let save = document.createElement("button");
     save.onclick = saveParams;
