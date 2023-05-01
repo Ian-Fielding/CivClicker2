@@ -93,37 +93,55 @@ const userSchema = new mongoose.Schema({
 		purchasedUpgrades: [String]
 	  },
 	friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }],
-	friendsPending: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }]
+	friendsPending: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }],
 });
 const User = mongoose.model('User', userSchema);
 
 // Define Searching Schema
 const searchingUsers = new mongoose.Schema({
-    searcher: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema'}],
+    username: String,
+    searcher: { type: mongoose.Schema.Types.ObjectId, ref: 'userSchema'},
+    opponent: { type: mongoose.Schema.Types.ObjectId, ref: 'searchingUsers' },
     power: Number,
 })
-const Searcher = new mongoose.model('Searchers', searchingUsers);
+const Searcher = mongoose.model('Searchers', searchingUsers);
 
 
-app.post('/add/searcher', async (req, res) =>{
+app.post('/add/searcher', async (req, res) => {
     const username = req.body.user;
-    try{
-        const user = await User.findOne({
-            username: username
-        });
-        if (user){
-            const searchingUser = new Searcher({
-                searcher: user,
-                power: req.body.battlePower
-            });
-            searchingUser.save()
-            .then(() => res.send('User added successfully'))
-            .catch((err) => console.error('Error Caught', err));
-        }
-    }
-    catch (err) {
-        console.error('Error Caught', err);
-        res.send('Server error');
+    try {
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return res.send('User not found');
+      }
+      const searchingUser = new Searcher({
+        username: username,
+        searcher: user,
+        opponent: null,
+        power: req.body.battlePower
+      });
+      await searchingUser.save();
+      // Find all the searchers except the current user
+      const searchers = await Searcher.find({
+        username: { $ne: username },
+        opponent: null
+      });
+      console.log(searchers.length);
+      if (searchers.length >= 1) {
+        const userF = await Searcher.findOne({ username: username });
+        const foundUser = searchers[0];
+        foundUser.opponent = userF._id;
+        userF.opponent = foundUser._id;
+        await foundUser.save();
+        await userF.save();
+        console.log('Players matched:', foundUser.username, 'vs', userF.username);
+        const opponent1 = searchers[0];
+        console.log('opponent1:', opponent1);
+        res.redirect(`/battle.html?opponent1Power=${opponent1.power}&opponent2Power=${userF.power}`);
+      }
+    } catch (err) {
+      console.error('Error Caught', err);
+      res.send('Server error');
     }
 });
 
@@ -153,36 +171,6 @@ app.get('/cancel/searcher/:user', async (req, res) =>{
         res.send('Server error');
     }
 })
-
-app.get('/found/searcher/:user', async (req, res) =>{
-    const username = req.params.user;
-    try {
-      // Find the user in the User collection
-      const user = await User.findOne({ username });
-  
-      // Find all the searchers except the current user
-      const searchers = await Searcher.find({ searcher: { $ne: user._id } });
-  
-      // If there are no other searchers, send an error message
-      if (searchers.length === 0) {
-        return res.send('No other searchers found');
-      }
-  
-      // Select a random searcher from the searchers array
-      const randomIndex = Math.floor(Math.random() * searchers.length);
-      const randomSearcher = searchers[randomIndex];
-  
-      // Find the user associated with the random searcher
-      const foundUser = await User.findById(randomSearcher.searcher);
-  
-      // Send the found user object as a response
-      res.send(foundUser);
-    } catch (err) {
-      console.error('Error Caught', err);
-      res.send('Server error');
-    }
-})
-
 
 /**
  * ADDING AND LOGGING IN USERS

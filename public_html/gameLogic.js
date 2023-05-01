@@ -69,7 +69,6 @@ async function saveParams() {
 }
 
 function findUsers(){
-
     const resultsDiv = document.getElementById('searchResults');
     resultsDiv.innerHTML = ''; // Clear all search results
     fetch(`/search/users/${searchPlayers.value}`)
@@ -125,14 +124,6 @@ function cancelSearch(){
         searching = false;
     }
 }
-
-// STILL IN PROGRESS, NEED TO SET ON AN INTERVAL TO CHECK
-function checkForBattle(){
-    if (searching){
-        fetch(`/found/searcher/${username}`)
-    }
-}
-
 
 // reinitializes game
 function init() {

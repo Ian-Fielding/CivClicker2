@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Battle</title>
+		<link rel="stylesheet" href="styleGame.css">
+	</head>
+  <body>
+    <h1>Battle!</h1>
+    <p>Opponent 1 power: <span id="opponent1Power"></span></p>
+    <p>Opponent 2 power: <span id="opponent2Power"></span></p>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const opponent1Power = urlParams.get('opponent1Power');
+      const opponent2Power = urlParams.get('opponent2Power');
+      document.getElementById('opponent1Power').textContent = opponent1Power;
+      document.getElementById('opponent2Power').textContent = opponent2Power;
+    </script>
+  </body>
+</html>
