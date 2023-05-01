@@ -111,7 +111,15 @@ const searchingUsers = new mongoose.Schema({
     opponent: { type: mongoose.Schema.Types.ObjectId, ref: 'searchingUsers' },
     power: Number,
 })
-const Searcher = mongoose.model('Searchers', searchingUsers);
+const Searcher = mongoose.model('Searcher', searchingUsers);
+
+const battleUsers = new mongoose.Schema({
+  opponent1: String,
+  opponent2: String,
+  power1: Number,
+  power2: Number
+})
+const Battler = mongoose.model('Battler', battleUsers);
 
 
 app.post('/add/searcher', async (req, res) => {
@@ -143,12 +151,90 @@ app.post('/add/searcher', async (req, res) => {
         await userF.save();
         console.log('Players matched:', foundUser.username, 'vs', userF.username);
         const opponent1 = searchers[0];
+        const battleUsers = new Battler({
+          opponent1: userF.username,
+          opponent2: opponent1.username,
+          power1: -1,
+          power2: -1
+        })
+        await battleUsers.save();
         res.redirect(`/battle.html?opponent1Power=${userF.power}&opponent2Power=${opponent1.power}&opponent1Username=${userF.username}&opponent2Username=${opponent1.username}`);
       }
     } catch (err) {
       console.error('Error Caught', err);
       res.send('Server error');
     }
+});
+
+app.post('/adjust/power', async (req, res) =>{
+  const username = req.body.user;
+  const power = req.body.power;
+  const battler = await Battler.findOne({
+    $or: [
+      { opponent1: username },
+      { opponent2: username }
+    ]
+    });
+    if (battler.opponent1 === username) {
+      battler.power1 = power;
+    } else if (battler.opponent2 === username) {
+      battler.power2 = power;
+    }
+    await battler.save();
+});
+
+app.get('/check/winner/:user', async (req, res) =>{
+  const username = req.params.user;
+  const battler = await Battler.findOne({
+    $or: [
+      { opponent1: username },
+      { opponent2: username }
+    ]
+    });
+    if(battler.power1 != -1 && battler.power2 != -1){
+            if (battler.power1 > battler.power2) {
+              if(battler.opponent1 === username){
+                battler.opponent1 = "-1";
+                await battler.save();
+                res.json({
+                  victory: true,
+                  otherPower: battler.power2
+                });
+              }
+              else{
+                battler.opponent2 = "-1";
+                await battler.save();
+                res.json({
+                  victory: false,
+                  otherPower: battler.power1
+                });
+              }
+          }
+          if (battler.power1 < battler.power2) {
+            if(battler.opponent2 === username){
+              battler.opponent2 = "-1";
+              await battler.save();
+              res.json({
+                victory: true,
+                otherPower: battler.power1
+              });
+            }
+            else{
+              battler.opponent1 = "-1";
+              await battler.save();
+              res.json({
+                victory: false,
+                otherPower: battler.power2
+        });
+      }
+    }
+    await Battler.deleteOne({
+      $and: [
+        { opponent1: "-1" },
+        { opponent2: "-1" }
+      ]
+      });
+  }
 });
 
 app.get('/found/searcher/:user', async (req, res) => {
