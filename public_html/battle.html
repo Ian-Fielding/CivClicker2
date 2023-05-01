@@ -35,6 +35,8 @@
 
       let opponent1PowerInt = parseInt(opponent1Power);
 
+      let finished = false;
+
       let battlePower = document.createElement("button");
       battlePower.innerHTML = "Increase Power!";
       battlePower.onclick = adjustPower;
@@ -61,9 +63,11 @@
         }, 10000);
 
         setInterval(()=>{
+          if (!finished){
           fetch('/check/winner/' + username)
           .then(response => response.json())
           .then(results =>{
+            finished = true;
             document.getElementById('opponent2Power').textContent = results.otherPower.toString();
             if(results.victory){
               document.getElementById('opponent1Power').textContent = "Victory";
@@ -71,6 +75,7 @@
               document.getElementById('opponent1Power').textContent = "Defeat";
             }
           })
+          }
         }, 1000);
 
     </script>

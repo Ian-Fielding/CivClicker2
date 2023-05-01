@@ -195,6 +195,7 @@ app.get('/check/winner/:user', async (req, res) =>{
             if (battler.power1 > battler.power2) {
               if(battler.opponent1 === username){
                 battler.opponent1 = "-1";
+                await battler.save();
                 res.json({
                   victory: true,
                   otherPower: battler.power2
@@ -202,6 +203,7 @@ app.get('/check/winner/:user', async (req, res) =>{
               }
               else{
                 battler.opponent2 = "-1";
+                await battler.save();
                 res.json({
                   victory: false,
                   otherPower: battler.power1
@@ -211,6 +213,7 @@ app.get('/check/winner/:user', async (req, res) =>{
           if (battler.power1 < battler.power2) {
             if(battler.opponent2 === username){
               battler.opponent2 = "-1";
+              await battler.save();
               res.json({
                 victory: true,
                 otherPower: battler.power1
@@ -218,6 +221,7 @@ app.get('/check/winner/:user', async (req, res) =>{
             }
             else{
               battler.opponent1 = "-1";
+              await battler.save();
               res.json({
                 victory: false,
                 otherPower: battler.power2
@@ -225,7 +229,7 @@ app.get('/check/winner/:user', async (req, res) =>{
       }
     }
     await Battler.deleteOne({
-      $or: [
+      $and: [
         { opponent1: "-1" },
         { opponent2: "-1" }
       ]
