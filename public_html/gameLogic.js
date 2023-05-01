@@ -107,11 +107,29 @@ function battleSearching(){
                 user: username,
                 battlePower: battlePower(),
             }),
+        }).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
         });
 
         searching = true;
     }
 }
+
+setInterval(() => {
+    if(searching){
+      fetch('/found/searcher/' + username)
+        .then(response => response.json())
+        .then(data => {
+          if (data.found) {
+            // Redirect to battle page
+            window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}`;
+          }
+        })
+        .catch(error => console.error(error));
+    }
+}, 1000);
 
 function cancelSearch(){
     if(searching){

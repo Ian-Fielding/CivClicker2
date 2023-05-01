@@ -136,14 +136,43 @@ app.post('/add/searcher', async (req, res) => {
         await userF.save();
         console.log('Players matched:', foundUser.username, 'vs', userF.username);
         const opponent1 = searchers[0];
-        console.log('opponent1:', opponent1);
-        res.redirect(`/battle.html?opponent1Power=${opponent1.power}&opponent2Power=${userF.power}`);
+        res.redirect(`/battle.html?opponent1Power=${userF.power}&opponent2Power=${opponent1.power}`);
       }
     } catch (err) {
       console.error('Error Caught', err);
       res.send('Server error');
     }
 });
+
+app.get('/found/searcher/:user', async (req, res) => {
+    const username = req.params.user;
+    try {
+      const user = await Searcher.findOne({ username: username });
+      if (user.opponent) {
+        const opponent = await Searcher.findById(user.opponent);
+        if (opponent.opponent.equals(user._id)) {
+          // Both players have found each other
+          await Searcher.deleteMany({
+            _id: { $in: [user._id, opponent._id] }
+          });
+          res.json({
+            found: true,
+            playerId: user._id,
+            opponentId: opponent._id,
+            userPower: user.power,
+            opponentPower: opponent.power
+          });
+        }
+      } else {
+        res.json({
+          found: false
+        });
+      }
+    } catch (err) {
+      console.error('Error Caught', err);
+      res.send('Server error');
+    }
+  });
 
 app.get('/cancel/searcher/:user', async (req, res) =>{
     const username = req.params.user;
