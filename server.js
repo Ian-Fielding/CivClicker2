@@ -407,17 +407,25 @@ async function acceptFriendRequest(requestingUserId, acceptingUserId) {
 	}
 }
 
+
+// Search for users by keyword, can be used to add friends
+app.get('/search/pending/:username', async (req, res) => {
+	const username = req.params.username;
+    let user = await User.findOne({
+        username: username
+    });
+    res.end(JSON.stringify(user.friendsPending, null, 2));
+});
+
+
 // Search for users by keyword, can be used to add friends
 app.get('/search/users/:keyword', (req, res) => {
-
 	const keyword = req.params.keyword;
 	const regex = new RegExp(keyword, 'i');
 	User.find({username: regex}).exec()
 	  .then((users) => res.end(JSON.stringify(users, null, 2)))
 	  .catch((err) => console.error('Error Caught', err))
   });
-
-
 
 
 // STARTS THE APP

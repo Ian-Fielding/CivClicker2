@@ -83,7 +83,7 @@ function findUsers(){
         users.forEach((user) =>{
             const itemDiv = document.createElement('div');
             const name = document.createElement('h3');
-            const friend = document.createElement('button')
+            const friend = document.createElement('button');
             name.textContent = user.username;
             friend.textContent = "Send Friend Request";
             friend.onclick = sendRequest(user.username);
@@ -94,6 +94,28 @@ function findUsers(){
         })
         .catch((err) => console.error('Error Caught', err));
 };
+
+function showRequests(){
+    const resultsDiv = document.getElementById('searchResults');
+    resultsDiv.innerHTML = ''; // Clear all search results
+    fetch(`/search/pending/${username}`)
+    .then((response) => response.json())
+    .then((users) => {
+        users.forEach((user) =>{
+            const itemDiv = document.createElement('div');
+            const name = document.createElement('h3');
+            const friend = document.createElement('button');
+            console.log(user.username);
+            name.textContent = user.username;
+            friend.textContent = "Accept Friend Request";
+            //friend.onclick = sendRequest(user.username);
+            itemDiv.appendChild(name);
+            itemDiv.appendChild(friend);
+            resultsDiv.appendChild(itemDiv);
+        })
+        })
+        .catch((err) => console.error('Error Caught', err));
+}
 
 function sendRequest(friendName){
     fetch('/users/request', {
@@ -215,6 +237,12 @@ function initDOM() {
     searchButton.innerHTML = "Find Friends";
     searchButton.onclick = findUsers;
     document.getElementById("search").appendChild(searchButton);
+
+    // Creates Pending Requests Button
+    let seeRequests = document.createElement("button");
+    seeRequests.innerHTML = "See Pending Friends";
+    seeRequests.onclick = showRequests;
+    document.getElementById("search").appendChild(seeRequests);
 
     // Creates Battle Button
     let battleSearch = document.createElement("button");
