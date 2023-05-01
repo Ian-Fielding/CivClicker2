@@ -151,10 +151,6 @@ app.get('/found/searcher/:user', async (req, res) => {
       if (user.opponent) {
         const opponent = await Searcher.findById(user.opponent);
         if (opponent.opponent.equals(user._id)) {
-          // Both players have found each other
-          await Searcher.deleteMany({
-            _id: { $in: [user._id, opponent._id] }
-          });
           res.json({
             found: true,
             playerName: user.username,
@@ -162,6 +158,10 @@ app.get('/found/searcher/:user', async (req, res) => {
             userPower: user.power,
             opponentPower: opponent.power
           });
+            // Both players have found each other
+            await Searcher.deleteMany({
+                _id: { $in: [user._id, opponent._id] }
+            });
         }
       } else {
         res.json({
@@ -172,7 +172,7 @@ app.get('/found/searcher/:user', async (req, res) => {
       console.error('Error Caught', err);
       res.send('Server error');
     }
-  });
+});
 
 app.get('/cancel/searcher/:user', async (req, res) =>{
     const username = req.params.user;
