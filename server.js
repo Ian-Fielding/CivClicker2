@@ -97,6 +97,13 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
+
+
+
+/**
+ * EVERYTHING FOR THE MATCHMAKING AND MULTIPLAYER
+ */
+
 // Define Searching Schema
 const searchingUsers = new mongoose.Schema({
     username: String,
@@ -200,6 +207,9 @@ app.get('/cancel/searcher/:user', async (req, res) =>{
         res.send('Server error');
     }
 })
+
+
+
 
 /**
  * ADDING AND LOGGING IN USERS
@@ -325,7 +335,12 @@ app.post('/save/params', async function(req, res) {
     user.save();
 });
 
-// FRIEND REQUESTS
+
+
+
+/**
+ * FRIEND REQUESTS AND TRADING
+ */
 
 app.post('/users/request', async (req, res) => {
 	try {
@@ -347,7 +362,7 @@ app.post('/users/request', async (req, res) => {
 	  }
   
 	  // Add the friend request to the user's pending friend requests
-	  friend.friendsPending.push(friend._id);
+	  friend.friendsPending.push(username._id);
 	  await friend.save();
   
 	  res.status(200).json({ message: 'Friend request sent successfully' });
@@ -401,6 +416,11 @@ app.get('/search/users/:keyword', (req, res) => {
 	  .then((users) => res.end(JSON.stringify(users, null, 2)))
 	  .catch((err) => console.error('Error Caught', err))
   });
+
+
+
+
+// STARTS THE APP
 
 app.listen(port, function() {
     console.log(`App listening at http://localhost:${port}`);

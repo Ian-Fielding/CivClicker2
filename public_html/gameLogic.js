@@ -53,7 +53,9 @@ function battlePower(){
 }
 
 
-// Saves the Params
+/**
+ * SAVING OF PARAMETERS
+ */
 
 async function saveParams() {
     fetch('/save/params', {
@@ -68,6 +70,10 @@ async function saveParams() {
     });
 }
 
+/**
+ * SEARCH FOR USERS TO FRIEND
+ */
+
 function findUsers(){
     const resultsDiv = document.getElementById('searchResults');
     resultsDiv.innerHTML = ''; // Clear all search results
@@ -77,13 +83,34 @@ function findUsers(){
         users.forEach((user) =>{
             const itemDiv = document.createElement('div');
             const name = document.createElement('h3');
+            const friend = document.createElement('button')
             name.textContent = user.username;
+            friend.textContent = "Send Friend Request";
+            friend.onclick = sendRequest(user.username);
             itemDiv.appendChild(name);
+            itemDiv.appendChild(friend);
             resultsDiv.appendChild(itemDiv);
         })
         })
         .catch((err) => console.error('Error Caught', err));
 };
+
+function sendRequest(friendName){
+    fetch('/users/request', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: username,
+            friendUsername: friendName
+        }),
+    });
+}
+
+/**
+ * FINDS USERS TO MATCH WITH FOR BATTLING
+ */
 
 function battleSearching(){
     if (!searching){
@@ -142,6 +169,12 @@ function cancelSearch(){
         searching = false;
     }
 }
+
+
+
+/**
+ * GAME CODE BELOW
+ */
 
 // reinitializes game
 function init() {
