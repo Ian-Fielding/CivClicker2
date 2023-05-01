@@ -124,7 +124,7 @@ setInterval(() => {
         .then(data => {
           if (data.found) {
             // Redirect to battle page
-            window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}`;
+            window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}&opponent1Username=${data.playerName}&opponent2Username=${data.opponentName}`;
           }
         })
         .catch(error => console.error(error));

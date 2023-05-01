@@ -136,7 +136,7 @@ app.post('/add/searcher', async (req, res) => {
         await userF.save();
         console.log('Players matched:', foundUser.username, 'vs', userF.username);
         const opponent1 = searchers[0];
-        res.redirect(`/battle.html?opponent1Power=${userF.power}&opponent2Power=${opponent1.power}`);
+        res.redirect(`/battle.html?opponent1Power=${userF.power}&opponent2Power=${opponent1.power}&opponent1Username=${userF.username}&opponent2Username=${opponent1.username}`);
       }
     } catch (err) {
       console.error('Error Caught', err);
@@ -157,8 +157,8 @@ app.get('/found/searcher/:user', async (req, res) => {
           });
           res.json({
             found: true,
-            playerId: user._id,
-            opponentId: opponent._id,
+            playerName: user.username,
+            opponentName: opponent.username,
             userPower: user.power,
             opponentPower: opponent.power
           });
