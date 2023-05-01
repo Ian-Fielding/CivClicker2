@@ -255,9 +255,9 @@ function initDOM() {
     let save = document.createElement("button");
     save.onclick = saveParams;
     save.innerHTML = "Save";
-    let saveText = document.createElement("p");
-    saveText.innerHTML = `Hello, ${username}!`
-    document.getElementById("save").appendChild(saveText);
+    let saveText = document.createElement("h2");
+    saveText.innerHTML = `Welcome to CivClicker2, ${username}!`
+    document.getElementById("gameTitle").appendChild(saveText);
     document.getElementById("save").appendChild(save);
     logout = document.createElement("button");
     logout.onclick = function(){
@@ -386,10 +386,10 @@ function initDOM() {
     workersDOM.appendChild(but4);
 
 
-    but2 = document.createElement("button");
-    but2.innerHTML="Sell Farmer";
-    but2.setAttribute("id", "sell-wheat-worker");
-    but2.onclick = function() {
+    but5 = document.createElement("button");
+    but5.innerHTML="Sell Farmer";
+    but5.setAttribute("id", "sell-wheat-worker");
+    but5.onclick = function() {
         if (params.workersWheat >= 1) {
             params.workersUnemployed++;
             params.workersWheat--;
@@ -397,10 +397,10 @@ function initDOM() {
         }
     }
 
-    but3 = document.createElement("button");
-    but3.innerHTML="Sell Miner";
-    but3.setAttribute("id", "sell-stone-worker");
-    but3.onclick = function() {
+    but6 = document.createElement("button");
+    but6.innerHTML="Sell Miner";
+    but6.setAttribute("id", "sell-stone-worker");
+    but6.onclick = function() {
         if (params.workersStone >= 1) {
             params.workersUnemployed++;
             params.workersStone--;
@@ -408,10 +408,10 @@ function initDOM() {
         }
     }
 
-    but4 = document.createElement("button");
-    but4.innerHTML="Sell Lumberjack";
-    but4.setAttribute("id", "sell-wood-worker");
-    but4.onclick = function() {
+    but7 = document.createElement("button");
+    but7.innerHTML="Sell Lumberjack";
+    but7.setAttribute("id", "sell-wood-worker");
+    but7.onclick = function() {
         if (params.workersWood >= 1) {
             params.workersUnemployed++;
             params.workersWood--;
@@ -420,9 +420,9 @@ function initDOM() {
     }
 
 
-    deallocWorkersDOM.appendChild(but2);
-    deallocWorkersDOM.appendChild(but3);
-    deallocWorkersDOM.appendChild(but4);
+    workersDOM.appendChild(but5);
+    workersDOM.appendChild(but6);
+    workersDOM.appendChild(but7);
 
     // appends upgrades
     for (let i = 1; i <= 8; i++) {

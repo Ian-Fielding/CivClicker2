@@ -7,8 +7,17 @@
 	</head>
 
 	<body>
+		
 		<div id="content">
-			<h1 id="gameTitle">Welcome to CivClicker2!</h1>
+			<div class="dropdown">
+				<button class="dropbtn">Settings</button>
+				<div class="dropdown-content">
+				<a href="#">Save</a>
+				<a href="#">Log Out</a>
+				<a href="#">Link 3</a>
+				</div>
+			  </div>
+			<h2 id="gameTitle"></h2>
 			<div id="search">
 			</div>
 			<div id="searchResults">
@@ -17,18 +26,41 @@
 			</div>
 			<div id="save">
 			</div>
-			<div id="resources">
-			</div>
-			<div id="buildings">
-			</div>
-			<div id="worker-list">
-			</div>
-			<div id="dealloc-workers">
-			</div>
 			<div id="param-change">Wheat: +0.0   Stone: +0.0   Wood: +0.0   Science: +0.0</div>
-			<div id="upgrade-list"></div>
+			<div class="tab">
+				<button class="tablinks" onclick="openCity(event, 'resources')">Resources</button>
+				<button class="tablinks" onclick="openCity(event, 'worker-list')">Workers</button>
+				<button class="tablinks" onclick="openCity(event, 'upgrade-list')">Upgrades</button>
+				<button class="tablinks" onclick="openCity(event, 'buildings')">Buildings</button>
+				<script>
+					function openCity(evt, cityName) {
+					  var i, tabcontent, tablinks;
+					  tabcontent = document.getElementsByClassName("tabcontent");
+					  for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					  }
+					  tablinks = document.getElementsByClassName("tablinks");
+					  for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(" active", "");
+					  }
+					  document.getElementById(cityName).style.display = "block";
+					  evt.currentTarget.className += " active";
+					}
+					</script>
+			  </div>
+			<div id="resources" class="tabcontent">
+			</div>
+			<div id="buildings" class="tabcontent">
+			</div>
+			<div id="worker-list" class="tabcontent">
+			</div>
+			<div id="dealloc-workers" class="tabcontent">
+			</div>
+			<div id="upgrade-list" class="tabcontent"></div>
+
 		</div>
 		<script src="gameLogic.js"></script>
+		
 	</body>
 
 </html>
