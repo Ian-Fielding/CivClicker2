@@ -31,6 +31,7 @@ function initTopDOM(){
     battleSearch.onclick = battleSearching;
     document.getElementById("search").appendChild(battleSearch);
 
+    // Creates SearchResults Div (needs to stay below the above elements)
     let searchResults = document.createElement("div");
     searchResults.id = "searchResults";
     document.getElementById("search").appendChild(searchResults);
