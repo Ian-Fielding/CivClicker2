@@ -282,5 +282,5 @@ Promise.all([upgPromise, buiPromise, resPromise, powPromise, parPromise])
 
         initTopDOM();
         init();
-        openCity("resources");
+        openElement("resources");
     });

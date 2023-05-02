@@ -33,13 +33,13 @@ function initTopDOM(){
 
 
     // save button & welcome text
-    let save = document.createElement("button");
+    let save = document.createElement("a");
     save.onclick = saveParams;
     save.innerHTML = "Save";
     let saveText = document.createElement("h2");
     saveText.innerHTML = `The Great ${params.civName} of ${username}`;
     document.getElementById("gameTitle").appendChild(saveText);
-    document.getElementById("save").appendChild(save);
+    document.getElementById("dropdownContent").appendChild(save);
     logout = document.createElement("button");
     logout.onclick = function(){
         document.cookie="";
@@ -363,10 +363,10 @@ function clearScreen(){
     }
 }
 
-function openCity(cityName) {
+function openElement(elementName) {
     clearScreen();
 
-    let city=document.getElementById(cityName);
-    city.style.display = "block";
-    city.active=true;
+    let elem =document.getElementById(elementName);
+    elem.style.display = "block";
+    elem.active=true;
 }

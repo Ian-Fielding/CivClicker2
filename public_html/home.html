@@ -11,37 +11,43 @@
 		<div id="content">
 			<div class="dropdown">
 				<button class="dropbtn">Settings</button>
-				<div class="dropdown-content">
-				<a href="#">Save</a>
+				<div class="dropdown-content" id="dropdownContent">
 				<a href="#">Log Out</a>
-				<a href="#">Link 3</a>
 				</div>
 			  </div>
 			<h2 id="gameTitle"></h2>
-			<div id="search">
+			<div id="searchResults" class="tabcontent">
 			</div>
-			<div id="searchResults">
+			<div id="battleSearch" class="tabcontent">
 			</div>
-			<div id="battleSearch">
-			</div>
-			<div id="save">
+			<div id="save" class="tabcontent">
 			</div>
 			<div id="param-change">Wheat: +0.0   Stone: +0.0   Wood: +0.0   Science: +0.0</div>
 			<div class="tab">
-				<button class="tablinks" onclick="openCity('resources')" id="resourcesTab">Resources</button>
-				<button class="tablinks" onclick="openCity('worker-list')">Workers</button>
-				<button class="tablinks" onclick="openCity('upgrade-list')">Upgrades</button>
-				<button class="tablinks" onclick="openCity('buildings')">Buildings</button>
+				<button class="tablinks" onclick="openElement('resources')" id="resourcesTab">Resources</button>
+				<button class="tablinks" onclick="openElement('worker-list')">Workers</button>
+				<button class="tablinks" onclick="openElement('upgrade-list')">Upgrades</button>
+				<button class="tablinks" onclick="openElement('buildings')">Buildings</button>
+				<button class="tablinks" onclick="openElement('search')">Multiplayer</button>
+			</div>
+			<div id="search" class="tabcontent">
+				<h3> <strong> Enter in a Username to Find Friends or Start a Battle! </strong></h3>
 			</div>
 			<div id="resources" class="tabcontent">
+				<h3> <strong> Click to Gather more Resources! </strong></h3>
 			</div>
 			<div id="buildings" class="tabcontent">
+				<h3> <strong> Purchase Buildings to Increase Resource Capacity.</strong> </h3>
 			</div>
 			<div id="worker-list" class="tabcontent">
 			</div>
 			<div id="dealloc-workers" class="tabcontent">
 			</div>
 			<div id="upgrade-list" class="tabcontent"></div>
+
+			<img src="./img/logo.png" alt="Logo">
+
+			<span id="credits"><i>Created 2023 by Benjamin Nylen, Thomas Obrenovich, & Ian Fielding</i></span>
 
 		</div>
 		<script src="dom.js"></script>
