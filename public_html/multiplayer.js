@@ -3,6 +3,8 @@ function battlePower(){
     return Math.ceil(power.warriors * params.workersWarriors);
 }
 
+let searching = false;
+
 /**
  * SEARCH FOR USERS TO FRIEND
  */
@@ -102,17 +104,25 @@ function viewFriends(){
             getUsername(user)
             .then(username => {
                 name.textContent = username;
+                trade.onclick = function() {
+                    sendResources(username);
+                };
             })
             trade.textContent = "Send Resources";
-            //trade.onclick = function() {
-                //sendRequest(user.username);
-              //};
             itemDiv.appendChild(name);
             itemDiv.appendChild(trade);
             resultsDiv.appendChild(itemDiv);
         })
         })
         .catch((err) => console.error('Error Caught', err));
+}
+
+async function sendResources(friend){
+    params.wheat -= 100;
+    params.wood -= 100;
+    params.stone -= 100;
+    fetch(`/gain/${friend}/100`)
+    .catch((err) => console.error('Error Caught', err));
 }
 
 async function getUsername(id) {
@@ -169,3 +179,17 @@ function cancelSearch(){
         searching = false;
     }
 }
+
+setInterval(function() {
+    if(searching){
+        fetch('/found/searcher/' + username)
+          .then(response => response.json())
+          .then(data => {
+            if (data.found) {
+              // Redirect to battle page
+              window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}&opponent1Username=${data.playerName}&opponent2Username=${data.opponentName}`;
+            }
+          })
+          .catch(error => console.error(error));
+      }
+}, 1000);

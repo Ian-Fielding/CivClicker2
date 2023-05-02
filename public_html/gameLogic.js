@@ -1,5 +1,4 @@
 const TESTING = true; //set to false in release!!
-let searching = false;
 
 // Checks for a cookie, and if it exists, retrieves the username
 if (document.cookie == "") {
@@ -139,18 +138,6 @@ function getSpecialResource(workers,pow){
 
 // update loop
 setInterval(function() {
-    if(searching){
-      fetch('/found/searcher/' + username)
-        .then(response => response.json())
-        .then(data => {
-          if (data.found) {
-            // Redirect to battle page
-            window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}&opponent1Username=${data.playerName}&opponent2Username=${data.opponentName}`;
-          }
-        })
-        .catch(error => console.error(error));
-    }
-
     let numWorkers = params.workersUnemployed + params.workersWood + params.workersStone + params.workersWheat + params.workersWarriors;
 
     // starvation

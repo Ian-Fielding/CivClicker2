@@ -561,23 +561,33 @@ app.get('/retrieve/:id', async (req, res) => {
   res.end(JSON.stringify(user, null, 2));
 });
 
-// WORK ON
-app.get('/gain/:user', async (req, res) => {
-  const id = req.params.id;
-  let user = await User.findOne({
-    _id: id
-  });
-  res.end(JSON.stringify(user, null, 2));
+app.get('/remove/:user/:amount', async (req, res) => {
+  const id = req.params.user;
+  const amount = parseInt(req.params.amount);
+  let user = await User.findOne({ username: id });
+  
+  user.params.wood -= amount;
+  user.params.wheat -= amount;
+  user.params.stone -= amount;
+  
+  await user.save();
+  
+  res.send(`Added ${amount} to ${id}'s resources.`);
 });
 
-app.get('/remove/:user', async (req, res) => {
-  const id = req.params.id;
-  let user = await User.findOne({
-    _id: id
-  });
-  res.end(JSON.stringify(user, null, 2));
+app.get('/gain/:user/:amount', async (req, res) => {
+  const id = req.params.user;
+  const amount = parseInt(req.params.amount);
+  let user = await User.findOne({ username: id });
+  
+  user.params.wood += amount;
+  user.params.wheat += amount;
+  user.params.stone += amount;
+  
+  await user.save();
+  
+  res.send(`Added ${amount} to ${id}'s resources.`);
 });
-// WORK ON 
 
 // STARTS THE APP
 

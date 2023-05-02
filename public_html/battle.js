@@ -55,9 +55,25 @@
           document.getElementById('opponent2Power').textContent = results.otherPower.toString();
           if(results.victory){
             document.getElementById('opponent1Power').textContent = "Victory";
+            fetch(`/gain/${username}/100`)
+            .catch((err) => console.error('Error Caught', err));
+            const back = document.createElement('button');
+            back.onclick = backPage;
+            back.textContent = "Back";
+            document.getElementById("back").append(back);
           } else{
             document.getElementById('opponent1Power').textContent = "Defeat";
+            fetch(`/remove/${username}/100`)
+            .catch((err) => console.error('Error Caught', err));
+            const back = document.createElement('button');
+            back.onclick = backPage;
+            back.textContent = "Back";
+            document.getElementById("back").append(back);
           }
         })
         }
       }, 1000);
+
+      function backPage(){
+        window.location.href = "/home.html";
+      }
