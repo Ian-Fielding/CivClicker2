@@ -199,6 +199,7 @@ app.get('/check/winner/:user', async (req, res) =>{
       { opponent2: username }
     ]
     });
+    if(battler){
     if(battler.power1 != -1 && battler.power2 != -1){
             if (battler.power1 > battler.power2) {
               if(battler.opponent1 === username){
@@ -243,6 +244,7 @@ app.get('/check/winner/:user', async (req, res) =>{
       ]
       });
   }
+}
 });
 
 app.get('/found/searcher/:user', async (req, res) => {
