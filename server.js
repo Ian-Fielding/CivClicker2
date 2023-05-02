@@ -486,9 +486,10 @@ app.post('/users/request', async (req, res) => {
 
 
 app.post('/accept/friend', async (req, res) => {
-	const { requestingUserId, acceptingUserId } = req.body;
+  const requestingUser = await User.findById(req.body.friendUsername);
+  const acceptingUser = await User.findOne({ username: req.body.user });
 	try {
-	  await acceptFriendRequest(requestingUserId, acceptingUserId);
+	  await acceptFriendRequest(requestingUser, acceptingUser);
 	  res.sendStatus(200);
 	} catch (err) {
 	  console.error(err);
@@ -496,28 +497,29 @@ app.post('/accept/friend', async (req, res) => {
 	}
 });
 
-async function acceptFriendRequest(requestingUserId, acceptingUserId) {
+async function acceptFriendRequest(requestingUser, acceptingUser) {
 	try {
-	  const requestingUser = await User.findById(requestingUserId);
-	  const acceptingUser = await User.findById(acceptingUserId);
-  
-	  // Check if the accepting user is already a friend of the requesting user
-	  if (requestingUser.friends.includes(acceptingUserId)) {
-		throw new Error('User is already a friend');
-	  }
-  
 	  // Add the accepting user to the requesting user's friends list
-	  requestingUser.friends.push(acceptingUserId);
+	  requestingUser.friends.push(acceptingUser._id);
 	  await requestingUser.save();
   
 	  // Add the requesting user to the accepting user's friends list
-	  acceptingUser.friends.push(requestingUserId);
+	  acceptingUser.friends.push(requestingUser._id);
 	  await acceptingUser.save();
-      res.sendStatus(200);
+
+    await User.updateOne(
+      { _id: acceptingUser._id },
+      { $pull: { friendsPending: requestingUser._id } }
+    );
+
+    await User.updateOne(
+      { _id: requestingUser._id },
+      { $pull: { friendsPending: acceptingUser._id } }
+    );
+
 	} catch (err) {
 	  console.error(err);
 	  throw new Error('Failed to accept friend request');
-      res.sendStatus(500);
 	}
 }
 
@@ -540,6 +542,15 @@ app.get('/search/users/:keyword', (req, res) => {
 	  .then((users) => res.end(JSON.stringify(users, null, 2)))
 	  .catch((err) => console.error('Error Caught', err))
   });
+
+
+app.get('/retrieve/:id', async (req, res) => {
+  const id = req.params.id;
+  let user = await User.findOne({
+    _id: id
+  });
+  res.end(JSON.stringify(user, null, 2));
+});
 
 
 // STARTS THE APP

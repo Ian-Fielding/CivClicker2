@@ -1,10 +1,7 @@
-
-
 // returns integer representing the player's military strength
 function battlePower(){
     return Math.ceil(power.warriors * params.workersWarriors);
 }
-
 
 /**
  * SEARCH FOR USERS TO FRIEND
@@ -23,7 +20,9 @@ function findUsers(){
             const friend = document.createElement('button');
             name.textContent = user.username;
             friend.textContent = "Send Friend Request";
-            friend.onclick = sendRequest(user.username);
+            friend.onclick = function() {
+                sendRequest(user.username);
+              };
             itemDiv.appendChild(name);
             itemDiv.appendChild(friend);
             resultsDiv.appendChild(itemDiv);
@@ -42,10 +41,17 @@ function showRequests(){
             const itemDiv = document.createElement('div');
             const name = document.createElement('h3');
             const friend = document.createElement('button');
-            console.log(user.username);
-            name.textContent = user.username;
+            getUsername(user)
+            .then(username => {
+                name.textContent = username;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+            friend.onclick = function() {
+                acceptRequest(username, this);
+            };
             friend.textContent = "Accept Friend Request";
-            //friend.onclick = sendRequest(user.username);
             itemDiv.appendChild(name);
             itemDiv.appendChild(friend);
             resultsDiv.appendChild(itemDiv);
@@ -65,6 +71,28 @@ function sendRequest(friendName){
             friendUsername: friendName
         }),
     });
+}
+
+function acceptRequest(friendName, button){
+    fetch('/accept/friend', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: username,
+            friendUsername: friendName
+        }),
+    })
+    .then(() => {
+        button.remove(); // Remove the button from the DOM
+    });
+}
+
+async function getUsername(id) {
+    const response = await fetch('/retrieve/' + id);
+    const users = await response.json();
+    return users.username;
 }
 
 /**
