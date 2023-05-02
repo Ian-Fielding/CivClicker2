@@ -31,6 +31,10 @@ function initTopDOM(){
     battleSearch.onclick = battleSearching;
     document.getElementById("search").appendChild(battleSearch);
 
+    let searchResults = document.createElement("div");
+    searchResults.id = "searchResults";
+    document.getElementById("search").appendChild(searchResults);
+
 
     // save button & welcome text
     let save = document.createElement("a");
