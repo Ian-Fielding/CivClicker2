@@ -45,19 +45,19 @@ function initTopDOM(){
     saveText.innerHTML = `The Great ${params.civName} of ${username}`;
     document.getElementById("gameTitle").appendChild(saveText);
     document.getElementById("dropdownContent").appendChild(save);
-    logout = document.createElement("button");
+    logout = document.createElement("a");
     logout.onclick = function(){
         document.cookie="";
         window.location.href = "/index.html";
     }
     logout.innerHTML = "Logout";
-    document.getElementById("save").appendChild(logout);
+    document.getElementById("dropdownContent").appendChild(logout);
     
 
     document.getElementById("save").appendChild(document.createElement("hr"));
 }
 
-// TODO Come up with better styling here
+
 function initDOM() {
 
     // basic DOM nodes for future use
@@ -354,7 +354,6 @@ function updateDOM() {
     
 
 }
-
 
 function clearScreen(){
     let i, tabcontent, tablinks;
