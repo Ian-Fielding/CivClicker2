@@ -524,13 +524,22 @@ async function acceptFriendRequest(requestingUser, acceptingUser) {
 }
 
 
-// Search for users by keyword, can be used to add friends
+// Retrieve for pending users
 app.get('/search/pending/:username', async (req, res) => {
 	const username = req.params.username;
     let user = await User.findOne({
         username: username
     });
     res.end(JSON.stringify(user.friendsPending, null, 2));
+});
+
+// Retrieve for pending users
+app.get('/search/friends/:username', async (req, res) => {
+	const username = req.params.username;
+    let user = await User.findOne({
+        username: username
+    });
+    res.end(JSON.stringify(user.friends, null, 2));
 });
 
 

@@ -89,6 +89,32 @@ function acceptRequest(friendName, button){
     });
 }
 
+function viewFriends(){
+    const resultsDiv = document.getElementById('searchResults');
+    resultsDiv.innerHTML = ''; // Clear all search results
+    fetch(`/search/friends/${username}`)
+    .then((response) => response.json())
+    .then((users) => {
+        users.forEach((user) =>{
+            const itemDiv = document.createElement('div');
+            const name = document.createElement('h3');
+            const trade = document.createElement('button');
+            getUsername(user)
+            .then(username => {
+                name.textContent = username;
+            })
+            trade.textContent = "Send Resources";
+            //trade.onclick = function() {
+                //sendRequest(user.username);
+              //};
+            itemDiv.appendChild(name);
+            itemDiv.appendChild(trade);
+            resultsDiv.appendChild(itemDiv);
+        })
+        })
+        .catch((err) => console.error('Error Caught', err));
+}
+
 async function getUsername(id) {
     const response = await fetch('/retrieve/' + id);
     const users = await response.json();

@@ -15,9 +15,15 @@ function initTopDOM(){
 
     // Creates Pending Requests Button
     let seeRequests = document.createElement("button");
-    seeRequests.innerHTML = "See Pending Friends";
+    seeRequests.innerHTML = "View Pending Friends";
     seeRequests.onclick = showRequests;
     document.getElementById("search").appendChild(seeRequests);
+
+    // Creates Pending Requests Button
+    let friendsList = document.createElement("button");
+    friendsList.innerHTML = "View Friends";
+    friendsList.onclick = viewFriends;
+    document.getElementById("search").appendChild(friendsList);
 
     // Creates Battle Button
     let battleSearch = document.createElement("button");
