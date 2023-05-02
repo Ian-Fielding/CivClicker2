@@ -561,6 +561,23 @@ app.get('/retrieve/:id', async (req, res) => {
   res.end(JSON.stringify(user, null, 2));
 });
 
+// WORK ON
+app.get('/gain/:user', async (req, res) => {
+  const id = req.params.id;
+  let user = await User.findOne({
+    _id: id
+  });
+  res.end(JSON.stringify(user, null, 2));
+});
+
+app.get('/remove/:user', async (req, res) => {
+  const id = req.params.id;
+  let user = await User.findOne({
+    _id: id
+  });
+  res.end(JSON.stringify(user, null, 2));
+});
+// WORK ON 
 
 // STARTS THE APP
 
