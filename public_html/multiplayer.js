@@ -49,7 +49,7 @@ function showRequests(){
                 console.error(error);
             });
             friend.onclick = function() {
-                acceptRequest(username, this);
+                acceptRequest(user, this);
             };
             friend.textContent = "Accept Friend Request";
             itemDiv.appendChild(name);
