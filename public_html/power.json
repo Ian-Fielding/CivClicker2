@@ -6,5 +6,8 @@
 	"warriors": "1",
 	"granaries": "200",
 	"stonePiles": "200",
-	"lumberyards": "200"
+	"lumberyards": "200",
+	"hardwood": "0.1",
+	"steel": "0.1",
+	"leather": "0.1"
 }

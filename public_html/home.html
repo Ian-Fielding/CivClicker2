@@ -28,26 +28,11 @@
 			</div>
 			<div id="param-change">Wheat: +0.0   Stone: +0.0   Wood: +0.0   Science: +0.0</div>
 			<div class="tab">
-				<button class="tablinks" onclick="openCity(event, 'resources')">Resources</button>
-				<button class="tablinks" onclick="openCity(event, 'worker-list')">Workers</button>
-				<button class="tablinks" onclick="openCity(event, 'upgrade-list')">Upgrades</button>
-				<button class="tablinks" onclick="openCity(event, 'buildings')">Buildings</button>
-				<script>
-					function openCity(evt, cityName) {
-					  var i, tabcontent, tablinks;
-					  tabcontent = document.getElementsByClassName("tabcontent");
-					  for (i = 0; i < tabcontent.length; i++) {
-						tabcontent[i].style.display = "none";
-					  }
-					  tablinks = document.getElementsByClassName("tablinks");
-					  for (i = 0; i < tablinks.length; i++) {
-						tablinks[i].className = tablinks[i].className.replace(" active", "");
-					  }
-					  document.getElementById(cityName).style.display = "block";
-					  evt.currentTarget.className += " active";
-					}
-					</script>
-			  </div>
+				<button class="tablinks" onclick="openCity('resources')" id="resourcesTab">Resources</button>
+				<button class="tablinks" onclick="openCity('worker-list')">Workers</button>
+				<button class="tablinks" onclick="openCity('upgrade-list')">Upgrades</button>
+				<button class="tablinks" onclick="openCity('buildings')">Buildings</button>
+			</div>
 			<div id="resources" class="tabcontent">
 			</div>
 			<div id="buildings" class="tabcontent">
@@ -59,6 +44,8 @@
 			<div id="upgrade-list" class="tabcontent"></div>
 
 		</div>
+		<script src="dom.js"></script>
+		<script src="multiplayer.js"></script>
 		<script src="gameLogic.js"></script>
 		
 	</body>

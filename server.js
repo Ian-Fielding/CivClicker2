@@ -78,20 +78,28 @@ const userSchema = new mongoose.Schema({
 	salt: String,
 	hash: String,
 	params : {
-		wheat: Number,
-		stone: Number,
-		wood: Number,
-		science: Number,
-		workersUnemployed: Number,
-		workersWheat: Number,
-		workersStone: Number,
-		workersWood: Number,
-		workersWarriors: Number,
-		granaries: Number,
-		stonePiles: Number,
-		lumberyards: Number,
-		purchasedUpgrades: [String]
-	  },
+        civName: String,
+        wheat:  Number,
+        stone:  Number,
+        wood:  Number,
+        science:  Number,
+        leather:  Number,
+        hardwood:  Number,
+        steel:  Number,
+        workersUnemployed: Number,
+        workersWheat: Number,
+        workersStone: Number,
+        workersWood: Number,
+        workersWarriors: Number,
+        granaries:  Number,
+        stonePiles:  Number,
+        lumberyards:  Number,
+        tents:  Number,
+        huts:  Number,
+        houses:  Number,
+        armories: Number,
+        purchasedUpgrades: [String]
+    },
 	friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }],
 	friendsPending: [{ type: mongoose.Schema.Types.ObjectId, ref: 'userSchema' }],
 });
@@ -305,6 +313,7 @@ app.get('/cancel/searcher/:user', async (req, res) =>{
 app.post('/add/user/', async (req, res) => {
     const username = req.body.user;
     const password = req.body.pass;
+    const civName = req.body.civname;
     try {
         const existingUser = await User.findOne({
             username: username
@@ -312,29 +321,45 @@ app.post('/add/user/', async (req, res) => {
         if (existingUser) {
             res.send('Username already exists');
         } else {
-            let newSalt = Math.floor((Math.random() * 1000000));
+            let newSalt = Math.floor((Math.random() * 1_000_000));
             let toHash = password + newSalt;
             let hash = crypto.createHash('sha3-256');
             let data = hash.update(toHash, 'utf-8');
             let newHash = data.digest('hex');
 
             let newParams = {
+
+                // name of civ
+                civName: civName, // String
+
+                // basic resources
                 wheat: 0, // Number
                 stone: 0, // Number
                 wood: 0, // Number
-
                 science: 0, // Number
 
+                // special resources
+                leather: 0,
+                hardwood: 0,
+                steel: 0,
+
+                // workers allocated
                 workersUnemployed: 0, //Number
                 workersWheat: 0, //Number
                 workersStone: 0, //Number
                 workersWood: 0, //Number
                 workersWarriors: 0, //Number
 
+                // buildings
                 granaries: 1, // Number
                 stonePiles: 1, // Number
                 lumberyards: 1, // Number
+                tents: 1,
+                huts: 0,
+                houses: 0, 
+                armories: 0,
 
+                // purchased upgrades
                 purchasedUpgrades: [], // [String]
             };
 
@@ -419,6 +444,7 @@ app.post('/save/params', async function(req, res) {
 
     user.params = params;
     user.save();
+    res.sendStatus(200);
 });
 
 
@@ -487,9 +513,11 @@ async function acceptFriendRequest(requestingUserId, acceptingUserId) {
 	  // Add the requesting user to the accepting user's friends list
 	  acceptingUser.friends.push(requestingUserId);
 	  await acceptingUser.save();
+      res.sendStatus(200);
 	} catch (err) {
 	  console.error(err);
 	  throw new Error('Failed to accept friend request');
+      res.sendStatus(500);
 	}
 }
 

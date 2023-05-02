@@ -1,6 +1,7 @@
 {
 	"granaries": {
 		"name": "Granary",
+		"unlockAfter": "",
 		"cost": {
 			"wheat": "100",
 			"stone": "20",
@@ -9,6 +10,7 @@
 	},
 	"lumberyards": {
 		"name": "Lumberyard",
+		"unlockAfter": "",
 		"cost": {
 			"wheat": "50",
 			"stone": "50",
@@ -17,10 +19,47 @@
 	},
 	"stonePiles": {
 		"name": "Stone Pile",
+		"unlockAfter": "",
 		"cost": {
 			"wheat": "50",
 			"stone": "200",
 			"wood": "50"
+		}
+	},
+	"tents": {
+		"name": "Tent",
+		"unlockAfter": "",
+		"cost": {
+			"wheat": "450",
+			"wood": "100",
+			"stone": "100"
+		}
+	},
+	"huts": {
+		"name": "Hut",
+		"unlockAfter": "upg1_6",
+		"cost": {
+			"wood": "300",
+			"stone": "300",
+			"wheat": "300"
+		}
+	},
+	"houses": {
+		"name": "House",
+		"unlockAfter": "upg3_5",
+		"cost": {		
+			"hardwood": "300",
+			"steel": "50",
+			"stone": "15000"
+		}
+	},
+	"armories": {
+		"name": "Armory",
+		"unlockAfter": "upg2_1",
+		"cost": {
+			"hardwood": "50",
+			"stone": "50",
+			"steel": "50"
 		}
 	}
 }

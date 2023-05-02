@@ -1,6 +1,7 @@
 // Create Account Section Inputs
 let username = document.getElementById('CreateUsername');
 let password = document.getElementById('CreatePassword');
+let civName = document.getElementById("civName");
 let addUserButton = document.getElementById('addUser');
 
 // Login Section Inputs
@@ -15,20 +16,21 @@ loginButton.addEventListener('click', loginUser);
 function createUser() {
 	const user = username.value.trim();
 	const pass = password.value.trim();
+	const civname = civName.value.trim();
 
-	if(user.length==0||pass.length==0){
-		alert("Username and password must be nonempty!");
+	if(user.length==0||pass.length==0||civname.length==0){
+		alert("Username, password and civ name must be nonempty!");
 		return;
 	}
 	fetch('/add/user/', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ user, pass })
+		body: JSON.stringify({ user, pass, civname })
 	})
 	.then(response => response.text())
 	.then(function(res){
 		if(res=="User added successfully")
-			alert(`User ${user} added successfully`);
+			alert(`User ${user} and civ ${civname} added successfully`);
 		else
 			alert(`User ${user} already exists`);
 	})

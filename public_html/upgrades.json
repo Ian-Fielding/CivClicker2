@@ -90,17 +90,6 @@
 		}
 	},
 	"upg2_2": {
-		"name": "Bronze Tools",
-		"desc": "All workers become 10% more effective",
-		"effect": "power.science*=1.1;power.wheat*=1.1;power.stone*=1.1;power.wood*=1.1;power.warriors*=1.1;",
-		"cost": {
-			"science": "50",
-			"stone": "750",
-			"wood": "500",
-			"wheat": "550"
-		}
-	},
-	"upg2_3": {
 		"name": "Scythes",
 		"desc": "Workers harvest wheat 50% more efficiently",
 		"effect": "power.wheat*=1.5;",
@@ -111,7 +100,7 @@
 			"wood": "750"
 		}
 	},
-	"upg2_4": {
+	"upg2_3": {
 		"name": "Pickaxes",
 		"desc": "Workers mine stone 50% more efficiently",
 		"effect": "power.stone*=1.5;",
@@ -122,7 +111,7 @@
 			"wood": "750"
 		}
 	},
-	"upg2_5": {
+	"upg2_4": {
 		"name": "Axes",
 		"desc": "Workers cut wood 50% more efficiently",
 		"effect": "power.wood*=1.5;",
@@ -133,7 +122,7 @@
 			"wood": "1000"
 		}
 	},
-	"upg2_6": {
+	"upg2_5": {
 		"name": "Bronze Swords",
 		"desc": "Warriors are 100% more effective",
 		"effect": "power.warriors*=2;",
@@ -143,280 +132,188 @@
 			"wheat": "1000"
 		}
 	},
-	"upg2_7": {
-		"name": "Walls",
-		"desc": "Allows the construction of walls",
-		"effect": "",
+	"upg2_6": {
+		"name": "Husbandry",
+		"desc": "Chance to create leather doubled",
+		"effect": "power.leather*=2;",
 		"cost": {
-			"science": "80",
-			"stone": "1000",
-			"wood": "1000"
+			"science": "200",
+			"leather": "100",
+			"wood": "3000"
+		}
+	},
+	"upg2_7": {
+		"name": "Forging",
+		"desc": "Chance to create steel doubled",
+		"effect": "power.steel*=2;",
+		"cost": {
+			"science": "200",
+			"wheat": "3000",
+			"steel": "100"
 		}
 	},
 	"upg2_8": {
-		"name": "Tactics",
-		"desc": "Allows workers to become archers and spearmen",
-		"effect": "",
+		"name": "Tree Farming",
+		"desc": "Chance to create hardwood doubled",
+		"effect": "power.hardwood*=2;",
 		"cost": {
-			"science": "100",
-			"wheat": "1000",
-			"wood": "1000"
+			"science": "200",
+			"stone": "3000",
+			"hardwood": "100"
 		}
 	},
 	"upg3_1": {
-		"name": "",
-		"desc": "",
+		"name": "Philosophy",
+		"desc": "Allows workers to create steel, hardwood and leather",
 		"effect": "",
 		"cost": {
-			"": ""
+			"science": "250",
+			"hardwood": "200",
+			"steel": "200",
+			"leather": "200"
 		}
 	},
 	"upg3_2": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
+		"name": "Iron Scythes",
+		"desc": "Workers harvest wheat 30% more efficiently",
+		"effect": "power.wheat*=1.3;",
+		"cost": {		
+			"science": "300",
+			"leather": "50",
+			"wheat": "5000"
 		}
 	},
 	"upg3_3": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
+		"name": "Iron Pickaxes",
+		"desc": "Workers harvest stone 30% more efficiently",
+		"effect": "power.stone*=1.3;",
+		"cost": {		
+			"science": "300",
+			"steel": "50",
+			"stone": "5000"
 		}
 	},
 	"upg3_4": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
+		"name": "Iron Axes",
+		"desc": "Workers harvest wood 30% more efficiently",
+		"effect": "power.wood*=1.3;",
+		"cost": {		
+			"science": "300",
+			"hardwood": "50",
+			"wood": "5000"
 		}
 	},
 	"upg3_5": {
-		"name": "",
-		"desc": "",
+		"name": "Housekeeping",
+		"desc": "Allows construction of houses",
 		"effect": "",
 		"cost": {
-			"": ""
+			"science": "330",
+			"hardwood": "70",
+			"steel": "30",
+			"wood": "4000",
+			"stone": "4000",
+			"wheat": "6000"
 		}
 	},
 	"upg3_6": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Iron Swords",
+		"desc": "Warriors are 25% more effective",
+		"effect": "power.warriors*=1.25;",
 		"cost": {
-			"": ""
+			"science": "400",
+			"steel": "50",
+			"stone": "9000",
+			"leather": "30"
 		}
 	},
 	"upg3_7": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Sanitation",
+		"desc": "Workers require 15% less wheat",
+		"effect": "foodpersec*=0.85;",
 		"cost": {
-			"": ""
+			"science": "750"
 		}
 	},
 	"upg3_8": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Transportation",
+		"desc": "Warriors are 10% more effective",
+		"effect": "power.warriors*=1.1;",
 		"cost": {
-			"": ""
+			"stone": "12000",
+			"science": "350"
 		}
 	},
 	"upg4_1": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Baking",
+		"desc": "Workers harvest wheat 25% more efficiently",
+		"effect": "power.wheat*=1.25",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"wheat": "30000"
 		}
 	},
 	"upg4_2": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Buffer Lumberjacks",
+		"desc": "Workers harvest wood 25% more efficiently",
+		"effect": "power.wood*=1.25",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"wood": "30000"
 		}
 	},
 	"upg4_3": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Larger Stones",
+		"desc": "Workers harvest stone 25% more efficiently",
+		"effect": "power.stone*=1.25",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"stone": "30000"
 		}
 	},
 	"upg4_4": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Engraving",
+		"desc": "Buildings become 50% cheaper",
+		"effect": "buildingcost*=0.5;",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"steel": "2000"
 		}
 	},
 	"upg4_5": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Chivalry",
+		"desc": "Warriors are 100% more effective",
+		"effect": "power.warriors*=2;",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"wheat": "160000"
 		}
 	},
 	"upg4_6": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Smaller Wheat",
+		"desc": "Granaries hold 100% more wheat",
+		"effect": "power.granaries*=2;",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"leather": "1000"
 		}
 	},
 	"upg4_7": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Ultimate Jenga",
+		"desc": "Stone piles hold 100% more stone",
+		"effect": "power.stonePiles*=2;",
 		"cost": {
-			"": ""
+			"science": "1000",
+			"steel": "1000"
 		}
 	},
 	"upg4_8": {
-		"name": "",
-		"desc": "",
-		"effect": "",
+		"name": "Home Depot",
+		"desc": "lumberyards hold 100% more wood",
+		"effect": "power.lumberyards*=2;",
 		"cost": {
-			"": ""
-		}
-	},
-	"upg5_1": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_2": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_3": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_4": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_5": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_6": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_7": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg5_8": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_1": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_2": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_3": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_4": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_5": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_6": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_7": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
-		}
-	},
-	"upg6_8": {
-		"name": "",
-		"desc": "",
-		"effect": "",
-		"cost": {
-			"": ""
+			"science": "1000",
+			"hardwood": "1000"
 		}
 	}
 }

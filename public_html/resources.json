@@ -3,24 +3,49 @@
 		"name": "Wheat",
 		"isButton": "true",
 		"unlockAfter": "",
+		"specialResource": "leather",
 		"storage": "granaries"
 	},
 	"wood": {
 		"name": "Wood",
 		"isButton": "true",
 		"unlockAfter": "",
+		"specialResource": "hardwood",
 		"storage": "lumberyards"
 	},
 	"stone": {
 		"name": "Stone",
 		"isButton": "true",
 		"unlockAfter": "",
+		"specialResource": "steel",
 		"storage": "stonePiles"
 	},
 	"science": {
 		"name": "Science",
 		"isButton": "false",
 		"unlockAfter": "",
+		"specialResource": "",
+		"storage": "null"
+	},
+	"leather": {
+		"name": "Leather",
+		"isButton": "false",
+		"unlockAfter": "1",
+		"specialResource": "",
+		"storage": "null"
+	},
+	"hardwood": {
+		"name": "Hardwood",
+		"isButton": "false",
+		"unlockAfter": "1",
+		"specialResource": "",
+		"storage": "null"
+	},
+	"steel": {
+		"name": "Steel",
+		"isButton": "false",
+		"unlockAfter": "1",
+		"specialResource": "",
 		"storage": "null"
 	}
 }
