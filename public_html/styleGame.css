@@ -108,3 +108,37 @@ body {font-family: Arial;}
     bottom:0;
     right:10px;
   }
+
+
+
+.gameButton {
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #4CAF50;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  margin: 5px;
+}
+
+.gameButton:hover {
+  background: #3d8c40;
+  text-decoration: none;
+}
+
+.gameButton:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  text-decoration: none;
+}
+
+
+.upgradeButton {
+  background-color: #EAF0EA;
+  margin: 5px;
+  border: 2px solid #4CAF50;
+  padding: 5px;
+}

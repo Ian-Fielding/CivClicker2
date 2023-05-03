@@ -1,3 +1,15 @@
+function getCost(cost){
+    let strs=[];
+    for(const val in cost)
+        strs.push(val);
+    strs.sort();
+
+    let str=cost[strs[0]]+" "+strs[0];
+    for(let i=1;i<strs.length;i++)
+        str+=", "+cost[strs[i]]+" "+strs[i];
+    return str;
+}
+
 function initTopDOM(){
 
     // Adds Player Search
@@ -69,12 +81,15 @@ function initDOM() {
     // basic DOM nodes for future use
     let resourcesDOM = document.getElementById("resources");
     let buildingsDOM = document.getElementById("buildings");
-    let workersDOM = document.getElementById("worker-list");
-    let deallocWorkersDOM = document.getElementById("dealloc-workers");
     resourcesDOM.innerHTML="";
     buildingsDOM.innerHTML="";
-    workersDOM.innerHTML="";
-    deallocWorkersDOM.innerHTML="";
+    document.getElementById("row-buy-worker").innerHTML="";
+    document.getElementById("row-wheat").innerHTML="";
+    document.getElementById("row-stone").innerHTML="";
+    document.getElementById("row-wood").innerHTML="";
+    document.getElementById("row-warrior").innerHTML="";
+
+
 
     // initializes resources
     for (const resource in resources) {
@@ -87,6 +102,7 @@ function initDOM() {
         let but = document.createElement("button");
         resourcesDOM.appendChild(but);
         but.setAttribute("id", `${resource}-button`);
+        but.setAttribute("class", `gameButton`);
 
         // on click, add resource to params
         but.onclick = function() {
@@ -120,6 +136,7 @@ function initDOM() {
         let but = document.createElement("button");
         buildingsDOM.appendChild(but);
         but.setAttribute("id", `${building}-button`);
+        but.setAttribute("class", `gameButton`);
 
         // on click, add building to param
         but.onclick = function() {
@@ -142,6 +159,7 @@ function initDOM() {
     // TODO this sucks! Come up with better styling
     let but1 = document.createElement("button");
     but1.setAttribute("id", "buy-worker");
+    but1.setAttribute("class", `gameButton`);
     but1.onclick = function() {
         if (params.wheat >= 20) {
             params.wheat -= 20;
@@ -152,6 +170,7 @@ function initDOM() {
 
     let but2 = document.createElement("button");
     but2.setAttribute("id", "wheat-worker");
+    but2.setAttribute("class", `gameButton`);
     but2.onclick = function() {
         if (params.workersUnemployed >= 1) {
             params.workersUnemployed--;
@@ -162,6 +181,7 @@ function initDOM() {
 
     let but3 = document.createElement("button");
     but3.setAttribute("id", "stone-worker");
+    but3.setAttribute("class", `gameButton`);
     but3.onclick = function() {
         if (params.workersUnemployed >= 1) {
             params.workersUnemployed--;
@@ -172,6 +192,7 @@ function initDOM() {
 
     let but4 = document.createElement("button");
     but4.setAttribute("id", "wood-worker");
+    but4.setAttribute("class", `gameButton`);
     but4.onclick = function() {
         if (params.workersUnemployed >= 1) {
             params.workersUnemployed--;
@@ -183,6 +204,7 @@ function initDOM() {
 
     let but5 = document.createElement("button");
     but5.setAttribute("id", "warrior-worker");
+    but5.setAttribute("class", `gameButton`);
     but5.onclick = function() {
         if (params.workersUnemployed >= 1 && params.workersWarriors < getMaxStorage("warriors")) {
             params.workersUnemployed--;
@@ -192,17 +214,18 @@ function initDOM() {
     }
 
 
-    workersDOM.appendChild(but1);
-    workersDOM.appendChild(but2);
-    workersDOM.appendChild(but3);
-    workersDOM.appendChild(but4);
+    document.getElementById("row-buy-worker").appendChild(but1);
+    document.getElementById("row-wheat").appendChild(but2);
+    document.getElementById("row-stone").appendChild(but3);
+    document.getElementById("row-wood").appendChild(but4);
     if(params.purchasedUpgrades.includes("upg2_1"))
-        workersDOM.appendChild(but5);
+        document.getElementById("row-warrior").appendChild(but5);
 
 
     but6 = document.createElement("button");
     but6.innerHTML="Remove Farmer";
     but6.setAttribute("id", "sell-wheat-worker");
+    but6.setAttribute("class", `gameButton`);
     but6.onclick = function() {
         if (params.workersWheat >= 1) {
             params.workersUnemployed++;
@@ -214,6 +237,7 @@ function initDOM() {
     but7 = document.createElement("button");
     but7.innerHTML="Remove Miner";
     but7.setAttribute("id", "sell-stone-worker");
+    but7.setAttribute("class", `gameButton`);
     but7.onclick = function() {
         if (params.workersStone >= 1) {
             params.workersUnemployed++;
@@ -225,6 +249,7 @@ function initDOM() {
     but8 = document.createElement("button");
     but8.innerHTML="Remove Lumberjack";
     but8.setAttribute("id", "sell-wood-worker");
+    but8.setAttribute("class", `gameButton`);
     but8.onclick = function() {
         if (params.workersWood >= 1) {
             params.workersUnemployed++;
@@ -236,6 +261,7 @@ function initDOM() {
     but9 = document.createElement("button");
     but9.innerHTML="Remove Warrior";
     but9.setAttribute("id", "sell-warrior-worker");
+    but9.setAttribute("class", `gameButton`);
     but9.onclick = function() {
         if (params.workersWarriors >= 1) {
             params.workersUnemployed++;
@@ -245,11 +271,12 @@ function initDOM() {
     }
 
 
-    workersDOM.appendChild(but6);
-    workersDOM.appendChild(but7);
-    workersDOM.appendChild(but8);
+
+    document.getElementById("row-wheat").appendChild(but6);
+    document.getElementById("row-stone").appendChild(but7);
+    document.getElementById("row-wood").appendChild(but8);
     if(params.purchasedUpgrades.includes("upg2_1"))
-        workersDOM.appendChild(but9);
+        document.getElementById("row-warrior").appendChild(but9);
 
     // appends upgrades
     for (let i = 1; i <= 8; i++) {
@@ -266,12 +293,13 @@ function initDOM() {
             let top = document.createElement("hr");
             let row = document.createElement("div");
             let but = document.createElement("button");
+            but.setAttribute("class", `gameButton`);
             let desc = document.createElement("p");
             let cost = document.createElement("p");
             let bot = document.createElement("hr");
 
             desc.innerHTML = upg.desc;
-            cost.innerHTML = `Cost: ${JSON.stringify(upg.cost)}`;
+            cost.innerHTML = `Cost: ${getCost(upg.cost)}`;
 
             document.getElementById("upgrade-list").appendChild(row);
             row.appendChild(top);
@@ -281,6 +309,7 @@ function initDOM() {
             row.appendChild(bot);
 
             row.setAttribute("id", `${name}-button`);
+            row.setAttribute("class", `upgradeButton`);
             but.innerHTML = upg.name;
 
             // handles purchasing of upgrades
