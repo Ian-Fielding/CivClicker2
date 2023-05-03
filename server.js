@@ -251,6 +251,7 @@ app.get('/found/searcher/:user', async (req, res) => {
     const username = req.params.user;
     try {
       const user = await Searcher.findOne({ username: username });
+      if(user){
       if (user.opponent) {
         const opponent = await Searcher.findById(user.opponent);
         if (opponent.opponent.equals(user._id)) {
@@ -270,7 +271,7 @@ app.get('/found/searcher/:user', async (req, res) => {
         res.json({
           found: false
         });
-      }
+      }}
     } catch (err) {
       console.error('Error Caught', err);
       res.send('Server error');

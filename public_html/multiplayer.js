@@ -137,7 +137,7 @@ async function getUsername(id) {
 
 function battleSearching(){
     if (!searching){
-        const resultsDiv = document.getElementById('battleSearch');
+        const resultsDiv = document.getElementById('searchResults');
         const itemDiv = document.createElement('div');
         const name = document.createElement('h3');
         name.textContent = "Searching...";
@@ -170,7 +170,7 @@ function battleSearching(){
 
 function cancelSearch(){
     if(searching){
-        const resultsDiv = document.getElementById('battleSearch');
+        const resultsDiv = document.getElementById('searchResults');
         resultsDiv.innerHTML = '';
         fetch(`/cancel/searcher/${username}`)
         .then((response) => response)

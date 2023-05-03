@@ -58,7 +58,9 @@
             fetch(`/gain/${username}/100`)
             .catch((err) => console.error('Error Caught', err));
             const back = document.createElement('button');
-            back.onclick = backPage;
+            back.onclick = function(){
+              window.location.href = "/home.html";
+            }
             back.textContent = "Back";
             document.getElementById("back").append(back);
           } else{
@@ -66,14 +68,12 @@
             fetch(`/remove/${username}/100`)
             .catch((err) => console.error('Error Caught', err));
             const back = document.createElement('button');
-            back.onclick = backPage;
+            back.onclick = function(){
+              window.location.href = "/home.html";
+            }
             back.textContent = "Back";
             document.getElementById("back").append(back);
           }
         })
         }
       }, 1000);
-
-      function backPage(){
-        window.location.href = "/home.html";
-      }
