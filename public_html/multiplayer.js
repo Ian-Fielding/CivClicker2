@@ -187,6 +187,7 @@ setInterval(function() {
           .then(data => {
             if (data.found) {
               // Redirect to battle page
+              searching = false;
               window.location.href = `/battle.html?opponent1Power=${data.opponentPower}&opponent2Power=${data.userPower}&opponent1Username=${data.playerName}&opponent2Username=${data.opponentName}`;
             }
           })

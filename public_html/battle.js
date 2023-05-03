@@ -1,7 +1,7 @@
       // Checks for a cookie, and if it exists, retrieves the username
-    //if (document.cookie == "") {
-        //window.location.href = "/index.html";
-    //}
+    if (document.cookie == "") {
+        window.location.href = "/index.html";
+    }
     const cookie = document.cookie;
     const jsonValue = JSON.parse(decodeURIComponent(cookie).split('login=')[1].replace(/^j:/, ''));
     const username = jsonValue.username;
@@ -54,7 +54,7 @@
           finished = true;
           document.getElementById('opponent2Power').textContent = results.otherPower.toString();
           if(results.victory){
-            document.getElementById('opponent1Power').textContent = "Victory";
+            document.getElementById('results').textContent = "Victory";
             fetch(`/gain/${username}/100`)
             .catch((err) => console.error('Error Caught', err));
             const back = document.createElement('button');
@@ -64,7 +64,7 @@
             back.textContent = "Back";
             document.getElementById("back").append(back);
           } else{
-            document.getElementById('opponent1Power').textContent = "Defeat";
+            document.getElementById('results').textContent = "Defeat";
             fetch(`/remove/${username}/100`)
             .catch((err) => console.error('Error Caught', err));
             const back = document.createElement('button');
