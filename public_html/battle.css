@@ -31,14 +31,15 @@ h1:hover {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-#increasePower{
+#increasePower button {
     text-align: center;
     font-size: 50px;
     color: red;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    left: 50%;
 }
 
-#increasePower {
+#increasePower button:active  {
     animation-duration: 0.5s;
     animation-name: shake;
   }
