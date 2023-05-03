@@ -57,6 +57,10 @@ body {font-family: Arial;}
     width: 25%;
   }
 
+  #village{
+    border: burlywood solid 5px;
+  }
+
   .dropbtn {
     background-color: #4CAF50;
     color: white;

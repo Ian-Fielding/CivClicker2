@@ -100,6 +100,7 @@ function init() {
                 break e;
     if (era == 5)
         era = 4;
+        document.getElementById("village").setAttribute("src", "./img/lvl" + era + ".png");
     console.log(`Currently in era ${era}`);
 
     // initializes DOM
