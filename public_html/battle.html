@@ -3,14 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Battle</title>
+    <link rel="stylesheet" href="battle.css">
 	</head>
   <body>
     <h1>Battle!</h1>
-    <p>Player Username: <span id="opponent1Username"></span></p>
-    <p>Opponent Username: <span id="opponent2Username"></span></p>
-    <p>Player power: <span id="opponent1Power"></span></p>
+    <div id="user">
+      <p>Player Username: <span id="opponent1Username"></span></p>
+      <p>Player Power: <span id="opponent1Power"></span></p>
+    </div>
+    <div id="opponent">
+      <p>Opponent Username: <span id="opponent2Username"></span></p>
+      <p>Opponent Power: <span id="opponent2Power"></span></p>
+    </div>
     <span id="increasePower"></span>
-    <p>Opponent power: <span id="opponent2Power"></span></p>
     <div id="back"></div>
     <script src="battle.js"></script>
   </body>

@@ -1,0 +1,52 @@
+h1{
+    text-align: center;
+    font-size: 50px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1 {
+    transition: transform 0.2s ease-in-out;
+}
+  
+h1:hover {
+    transform: translateY(-5px);
+}
+
+#user{
+    text-align: center;
+    float: left;
+    width: 50%;
+    background-color: lightgreen;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#opponent{
+    text-align: center;
+    float: right;
+    width: 50%;
+    background-color: lightcoral;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#increasePower{
+    text-align: center;
+    font-size: 50px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#increasePower {
+    animation-duration: 0.5s;
+    animation-name: shake;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 0); }
+    50% { transform: translate(5px, 0); }
+    75% { transform: translate(-5px, 0); }
+    100% { transform: translate(0, 0); }
+  }

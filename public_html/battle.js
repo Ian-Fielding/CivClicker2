@@ -1,7 +1,7 @@
       // Checks for a cookie, and if it exists, retrieves the username
-    if (document.cookie == "") {
-        window.location.href = "/index.html";
-    }
+    //if (document.cookie == "") {
+        //window.location.href = "/index.html";
+    //}
     const cookie = document.cookie;
     const jsonValue = JSON.parse(decodeURIComponent(cookie).split('login=')[1].replace(/^j:/, ''));
     const username = jsonValue.username;

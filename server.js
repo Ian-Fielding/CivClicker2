@@ -237,6 +237,11 @@ app.get('/check/winner/:user', async (req, res) =>{
         });
       }
     }
+    if(battler.power1 === battler.power2){
+      res.json({
+        victory: false,
+    });
+  }
     await Battler.deleteOne({
       $and: [
         { opponent1: "-1" },
