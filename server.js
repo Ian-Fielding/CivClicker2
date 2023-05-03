@@ -597,6 +597,15 @@ app.get('/gain/:user/:amount', async (req, res) => {
   res.send(`Added ${amount} to ${id}'s resources.`);
 });
 
+app.get('/users/top', async (req, res) => {
+  try {
+    const users = await User.find().sort({ 'params.science': -1 }).limit(10);
+    res.json(users);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 // STARTS THE APP
 
 app.listen(port, function() {

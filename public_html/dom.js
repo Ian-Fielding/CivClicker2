@@ -25,6 +25,12 @@ function initTopDOM(){
     friendsList.onclick = viewFriends;
     document.getElementById("search").appendChild(friendsList);
 
+    // Creates Leaderboard
+    let leaderboard = document.createElement("button");
+    leaderboard.innerHTML = "View Top Players";
+    leaderboard.onclick = viewTop;
+    document.getElementById("search").appendChild(leaderboard);
+
     // Creates Battle Button
     let battleSearch = document.createElement("button");
     battleSearch.innerHTML = "Search For Battle";

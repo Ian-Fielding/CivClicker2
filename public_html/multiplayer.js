@@ -206,3 +206,34 @@ setInterval(function() {
           .catch(error => console.error(error));
       }
 }, 1000);
+
+
+function viewTop(){
+    const resultsDiv = document.getElementById('searchResults');
+    resultsDiv.innerHTML = ''; // Clear all search results
+    let searchPlayers=document.getElementById("searchPlayers");
+    fetch(`/users/top/`)
+    .then((response) => response.json())
+    .then((users) => {
+        let int = 1;
+        users.forEach((user) =>{
+            const itemDiv = document.createElement('div');
+            const position = document.createElement('h3');
+            const name = document.createElement('h1');
+            position.textContent = int.toString();
+            name.textContent = user.username;
+            itemDiv.appendChild(position);
+            itemDiv.appendChild(name);
+            position.style.textDecoration = "underline";
+            itemDiv.style.border = "2px solid black";
+            itemDiv.style.textAlign = "center";
+            itemDiv.style.backgroundColor = "lightgoldenrodyellow";
+            if(int < 4){
+                itemDiv.style.backgroundColor = "gold";
+            }
+            resultsDiv.appendChild(itemDiv);
+            int++;
+        })
+        })
+        .catch((err) => console.error('Error Caught', err));
+}
