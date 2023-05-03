@@ -6,6 +6,45 @@
 		<link rel="stylesheet" href="styleGame.css">
 	</head>
 	<body>
-		<p>Text!</p>
+		<img src="img/logo.png">
+		<p>Welcome to CivClicker 2! This game is the spiritual successor to <a href="https://cheerfulghost.github.io/civ-clicker/index.html">CivClicker</a>, which is a popular incremental game. This project was made by Benjamin Nylen, Thomas Obrenovich and Ian Fielding for the Spring 2023 semester of CSC 337 at the University of Arizona.</p>
+
+		<br>
+
+		<h2>Gameplay</h2>
+		<p>The user, after creating an account and logging in, is greeted by the homepage. In the top left corner is <i>Settings</i>, which contains the Save option (which saves the user's data to the database) and the Logout option, which logs the user out and returns them to the homescreen.</p>
+
+		<br>
+
+		<p>Below the title of the game, the user has access to five tabs. The first is <i>Resources</i>, <i>Workers</i>, <i>Upgrades</i>, <i>Buildings</i> and <i>Multiplayer</i>. There is also a <i>Help</i> tab that allows the user to view the help page.</p>
+
+		<br>
+
+		<p>In the Resources tab, the user can click one of the wheat, wood or stone buttons to gain one of each resource. After the user has completed their first eight upgrades (see below), clicking on each button allows access to one of three special resources: leather, hardwood or steel. There is a maximum amount of resources that the user can store, however, but this limit can be increased by upgrades and buildings.</p>
+
+		<br>
+
+		<p>In the Workers tab, the user is able to purchase workers to automatically harvest resources for the user. After purchasing a worker using the "Buy Worker" button (assuming they are not yet at the limit of the number of workers) they gain one worker. Each worker by default consumes one wheat per second, and if there is no wheat, the worker will starve. The worker can be allocated to be a farmer that harvests wheat, a miner that harvests stone or a lumberjack that harvests wood. In addition, workers produce the resource "science" that is used for certain upgrades. All unallocated workers produce one science per ten seconds, otherwise the workers produce one science per one hundred seconds. Further into the game, the user can also allocate workers to be warriors, which is used in the battling mechanic.</p>
+
+		<br>
+
+		<p>In the Upgrades tab, the user is able to purchase permanent upgrades to progress the game. Generally, they remove debuffs or add bonuses to the player's resource acquisition. There are four sets (called eras) of eight upgrades each. </p>
+
+		<br>
+
+		<p>In the Buildings tab, the user is able to construct buildings that increase the maximum storage of resources or workers. Granaries, lumberyards and stone piles increase the storage of wheat, wood and stone respectively. Armories allow the increase of warriors. Tents, huts and houses all increase the storage of workers. If the user cannot purchase a building, the button will be grayed-out and cannot be clicked.</p>
+
+		<br>
+
+		<p>In the Multiplayer tab, TODO</p>
+
+		<br>
+
+		<h2>Programming</h2>
+		<p>The source code of this program is split into a number of files. In the root directory is server.js, which is the Express Node server that runs the website and handles the getting/posting of data. In public_html, the remaining files are found. There are a number of .css styling and .html skeleton files, but the main logic of the website is in the .js and .json files. login.js handles the logic for logging the user in and for creating new accounts. gameLogic.js handles the main game code and for updating or saving user parameters. dom.js handles setting up and updating the DOM. multiplayer.js and battle.js both deal with multiplayer features. There are also a variety of .json files that serve as static data repositories to cut down on code duplication in other files.</p>
+
+		<br>
+
+		<p>All of us worked for the same amount of time on this project, which lead to us contributing different quantities of code depending on how fast we worked. Ian worked mostly on the game logic, Thomas mostly worked on the server and Ben worked mostly on the styling and organization. The source code and commit history for this project can be found <a href="https://github.com/Ian-Fielding/CivClicker2">here</a>.</p>
 	</body>
 </html>
