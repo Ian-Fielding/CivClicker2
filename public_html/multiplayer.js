@@ -23,7 +23,7 @@ function findUsers(){
             name.textContent = user.username;
             friend.textContent = "Send Friend Request";
             friend.onclick = function() {
-                sendRequest(user.username);
+                sendRequest(user.username, this);
               };
             itemDiv.appendChild(name);
             itemDiv.appendChild(friend);
@@ -68,7 +68,7 @@ function showRequests(){
         .catch((err) => console.error('Error Caught', err));
 }
 
-function sendRequest(friendName){
+function sendRequest(friendName, button){
     fetch('/users/request', {
         method: 'POST',
         headers: {
@@ -78,6 +78,9 @@ function sendRequest(friendName){
             user: username,
             friendUsername: friendName
         }),
+    })
+    .then(() => {
+        button.remove(); // Remove the button from the DOM
     });
 }
 
