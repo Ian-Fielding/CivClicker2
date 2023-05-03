@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
-const port = 80;
+const port = 3000;
 
 let sessions = {};
 
