@@ -27,6 +27,9 @@ function findUsers(){
               };
             itemDiv.appendChild(name);
             itemDiv.appendChild(friend);
+            itemDiv.style.border = "2px solid black";
+            itemDiv.style.textAlign = "center";
+            itemDiv.style.backgroundColor = "lightcoral";
             resultsDiv.appendChild(itemDiv);
         })
         })
@@ -56,6 +59,9 @@ function showRequests(){
             friend.textContent = "Accept Friend Request";
             itemDiv.appendChild(name);
             itemDiv.appendChild(friend);
+            itemDiv.style.border = "2px solid black";
+            itemDiv.style.textAlign = "center";
+            itemDiv.style.backgroundColor = "lightblue";
             resultsDiv.appendChild(itemDiv);
         })
         })
@@ -111,6 +117,9 @@ function viewFriends(){
             trade.textContent = "Send Resources";
             itemDiv.appendChild(name);
             itemDiv.appendChild(trade);
+            itemDiv.style.border = "2px solid black";
+            itemDiv.style.textAlign = "center";
+            itemDiv.style.backgroundColor = "lightgreen";
             resultsDiv.appendChild(itemDiv);
         })
         })
