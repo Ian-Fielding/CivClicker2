@@ -1,4 +1,4 @@
-const TESTING = true; //set to false in release!!
+const TESTING = false; //set to false in release!!
 
 // Checks for a cookie, and if it exists, retrieves the username
 if (document.cookie == "") {
@@ -248,15 +248,15 @@ function canAffordBuilding(building){
 
 
 // initializes all JSON objects
-let upgPromise = fetch("http://localhost:80/upgrades.json")
+let upgPromise = fetch("upgrades.json")
     .then(res => res.json());
-let buiPromise = fetch("http://localhost:80/buildings.json")
+let buiPromise = fetch("buildings.json")
     .then(res => res.json());
-let resPromise = fetch("http://localhost:80/resources.json")
+let resPromise = fetch("resources.json")
     .then(res => res.json());
-let powPromise = fetch("http://localhost:80/power.json")
+let powPromise = fetch("power.json")
     .then(res => res.json());
-let parPromise = fetch(`http://localhost:80/load/params/${username}`)
+let parPromise = fetch(`load/params/${username}`)
     .then(res => res.json());
 
 Promise.all([upgPromise, buiPromise, resPromise, powPromise, parPromise])
